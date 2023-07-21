@@ -1,0 +1,29 @@
+syntax = "proto3";
+package pbMsgGateway;
+option go_package = ".;pbMsgGateway";
+
+service MsgGateway {
+    rpc ReceiveMessage(MessageReq) returns(MessageResp);
+    rpc ReceiveClientMsg(ClientMsgReq) returns(MessageResp);
+}
+
+message MessageResp {
+    int32   errCode = 1;
+    string  errMsg = 2;
+}
+
+message MessageReq {
+    string type = 1;
+    string message = 2;
+}
+
+message ClientMsgReq {
+    int64 sendID = 1;
+    int64 receID = 2;
+    string content = 3;
+}
+
+message ClientMsgResp {
+    int32 errCode = 1;
+    string errMsg = 2;
+}
