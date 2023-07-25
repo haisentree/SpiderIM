@@ -5,11 +5,11 @@ package baseAPIMessage
 // 2.将消息存储在mongodb中
 
 import (
-	"Spider/pkg/rabbitmq"
+	"SpiderIM/pkg/rabbitmq"
 )
 
-func main() {
+func Start() {
 	consumer := &rabbitmq.Consumer{}
-	consumer.Consumer_Init("send", "addr")
+	consumer.Consumer_Init("addr", "topic")
 	consumer.Run()
 }

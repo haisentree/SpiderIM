@@ -1,10 +1,10 @@
 package main
 
 import (
-	"SpiderIM/internal/msg_gateway"
+	MsgGateway "SpiderIM/internal/msg_gateway"
 )
 
-func main(){
+func main() {
 	var myWSGate MsgGateway.WServer
 
 	myWSGate.OnInit(8848)

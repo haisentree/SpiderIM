@@ -14,7 +14,7 @@ type Producer struct {
 
 func (p *Producer) Producer_Init(addr string, topic string) {
 	p.addr = addr
-	p.topic = topic
+	// p.topic = topic
 	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
 	if err != nil {
 		log.Println("Failed to connect to RabbitMQ")
@@ -26,17 +26,17 @@ func (p *Producer) Producer_Init(addr string, topic string) {
 	}
 
 	q, err := ch.QueueDeclare(
-		"work queues", // name
-		true,          // durable
-		false,         // delete when unused
-		false,         // exclusive
-		false,         // no-wait
-		nil,           // arguments
+		topic, // name
+		true,  // durable
+		false, // delete when unused
+		false, // exclusive
+		false, // no-wait
+		nil,   // arguments
 	)
 	if err != nil {
 		log.Println("Failed to declare a queue")
 	}
-
+	p.topic = q.Name
 	p.channel = ch
 }
 
@@ -52,7 +52,7 @@ func (p *Producer) SendMessage(msg []byte) error {
 			Body:         msg,
 		})
 	if err != nil {
-		log.Println("mq producer send message error!")
+		log.Println("mq producer send message error!:")
 	}
 
 	return err

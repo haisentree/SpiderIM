@@ -13,7 +13,7 @@ import (
 /*消息说明
 {
 	"sendID":12,
-	"client_type":10	// clientMsg
+	"clientType":10	// clientMsg
 	"platformID":2,
 	"recvID":2,
 	"content":

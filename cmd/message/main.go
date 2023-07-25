@@ -1,5 +1,19 @@
-package rabbitmq
+package main
 
+// // 该模块对mq的消息进行消费:
+// // 1.作为客户端连接websocket，进行转发消息
+// // 2.将消息存储在mongodb中
+
+// import (
+// 	baseAPIMessage "SpiderIM/internal/base_api/message"
+// )
+
+// func main() {
+// 	baseAPIMessage.Start()
+// }
+
+// 这里没有设计好，一个message应该是可以连接多个ws服务端，还可以连接多个mq，并行消费队列中的数据。
+// 可能是goruntine没用好，封装的consumer不正常，先把跑起来写业务代码，后面再封装
 import (
 	"bytes"
 	"log"
@@ -8,67 +22,53 @@ import (
 	"github.com/streadway/amqp"
 )
 
-type Consumer struct {
-	topic   string
-	addr    string
-	channel *amqp.Channel
+func FailOnError(err error, msg string) {
+	if err != nil {
+		log.Fatalf("%s: %s", msg, err)
+	}
 }
 
-func (c *Consumer) Consumer_Init(addr string, topic string) {
-	c.addr = addr
-	// c.topic = topic
+func main() {
+
 	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
-	if err != nil {
-		log.Println("Failed to connect to RabbitMQ")
-	}
+	FailOnError(err, "Failed to connect to RabbitMQ")
+	defer conn.Close()
 
 	ch, err := conn.Channel()
-	if err != nil {
-		log.Println("Failed to open a channel")
-	}
+	FailOnError(err, "Failed to open a channel")
+	defer ch.Close()
 
 	q, err := ch.QueueDeclare(
-		topic, // name
-		true,  // durable
-		false, // delete when unused
-		false, // exclusive
-		false, // no-wait
-		nil,   // arguments
+		"send", // name
+		true,   // durable
+		false,  // delete when unused
+		false,  // exclusive
+		false,  // no-wait
+		nil,    // arguments
 	)
-	if err != nil {
-		log.Println("Failed to declare a queue")
-	}
-	c.topic = q.Name
+	FailOnError(err, "Failed to declare a queue")
 
 	err = ch.Qos(
 		1,     // prefetch count 服务器将在收到确认之前将那么多消息传递给消费者。
 		0,     // prefetch size  服务器将尝试在收到消费者的确认之前至少将那么多字节的交付保持刷新到网络
 		false, // 当 global 为 true 时，这些 Qos 设置适用于同一连接上所有通道上的所有现有和未来消费者。当为 false 时，Channel.Qos 设置将应用于此频道上的所有现有和未来消费者
 	)
-	if err != nil {
-		log.Println("Failed to set QoS")
-	}
-	c.channel = ch
-}
+	FailOnError(err, "Failed to set QoS")
 
-// 这里需要修改一下，Consumer业务代码暂时写在这里
-func (c *Consumer) Run() {
-
-	msgs, err := c.channel.Consume(
-		c.topic, // queue
-		"",      // consumer
-		false,   // auto-ack
-		false,   // exclusive
-		false,   // no-local
-		false,   // no-wait
-		nil,     // args
+	msgs, err := ch.Consume(
+		q.Name, // queue
+		"",     // consumer
+		false,  // auto-ack
+		false,  // exclusive
+		false,  // no-local
+		false,  // no-wait
+		nil,    // args
 	)
-	if err != nil {
-		log.Println("Failed to register a consumer")
-	}
+	FailOnError(err, "Failed to register a consumer")
 
 	forever := make(chan bool)
 
+	// 编写业务代码
 	go func() {
 		for d := range msgs {
 			log.Printf("Received a message: %s", d.Body)
@@ -83,4 +83,5 @@ func (c *Consumer) Run() {
 
 	log.Printf(" [*] Waiting for messages. To exit press CTRL+C")
 	<-forever
+
 }

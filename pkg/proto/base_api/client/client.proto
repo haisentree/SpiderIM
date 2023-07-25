@@ -1,0 +1,18 @@
+syntax = "proto3";
+package pbBaseAPIClient;
+option go_package = ".;pbBaseAPIClient";
+
+service MsgGateway {
+    rpc CreateClient(CreateMessageReq) returns(CreateMessageResp);
+
+}
+
+message CreateMessageReq {
+    string secretKey = 1;
+    int32 cleintType = 2;
+}
+
+message CreateMessageResp {
+    string ClientID=1;
+    string ClientUUID=2;
+}
