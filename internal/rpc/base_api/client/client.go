@@ -2,12 +2,17 @@ package rpcBaseAPIClient
 
 import (
 	pbBaseAPIClient "SpiderIM/pkg/proto/base_api/client"
+	"SpiderIM/pkg/db/mysql"
 	"context"
 	"log"
 	"net"
 	"strconv"
 
 	"google.golang.org/grpc"
+)
+
+var (
+	MysqlDB DBMysql.MysqlDB
 )
 
 type rpcBaseAPIClient struct {
@@ -20,10 +25,15 @@ func New_rpcBaseAPIClient(port int) *rpcBaseAPIClient {
 	}
 }
 
+func (rpc *rpcBaseAPIClient) RpcBaseAPIClient_Init() {
+	MysqlDB.InitMysqlDB()
+}
+
 func (rpc *rpcBaseAPIClient) CreateClient(_ context.Context, req *pbBaseAPIClient.CreateMessageReq) (*pbBaseAPIClient.CreateMessageResp, error) {
 	// zap.S().Info("msg:", req.Message)
 	// zap.S().Info("type:", req.Type)
-	log.Println("tpc client")
+
+	// 校验key
 
 	return &pbBaseAPIClient.CreateMessageResp{ClientID: "23", ClientUUID: "sdfgdasfsdaf-asfsfadf-sdfsd"}, nil
 }
