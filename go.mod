@@ -6,6 +6,7 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-playground/validator/v10 v10.14.1
 	github.com/gorilla/websocket v1.5.0
+	github.com/satori/go.uuid v1.2.0
 	github.com/streadway/amqp v1.1.0
 	google.golang.org/grpc v1.56.2
 	google.golang.org/protobuf v1.31.0

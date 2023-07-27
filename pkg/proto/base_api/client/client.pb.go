@@ -30,7 +30,7 @@ type CreateMessageReq struct {
 	unknownFields protoimpl.UnknownFields
 
 	SecretKey  string `protobuf:"bytes,1,opt,name=secretKey,proto3" json:"secretKey,omitempty"`
-	CleintType int32  `protobuf:"varint,2,opt,name=cleintType,proto3" json:"cleintType,omitempty"`
+	ClientType int32  `protobuf:"varint,2,opt,name=clientType,proto3" json:"clientType,omitempty"`
 }
 
 func (x *CreateMessageReq) Reset() {
@@ -72,9 +72,9 @@ func (x *CreateMessageReq) GetSecretKey() string {
 	return ""
 }
 
-func (x *CreateMessageReq) GetCleintType() int32 {
+func (x *CreateMessageReq) GetClientType() int32 {
 	if x != nil {
-		return x.CleintType
+		return x.ClientType
 	}
 	return 0
 }
@@ -84,7 +84,7 @@ type CreateMessageResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ClientID   string `protobuf:"bytes,1,opt,name=ClientID,proto3" json:"ClientID,omitempty"`
+	ClientID   uint32 `protobuf:"varint,1,opt,name=ClientID,proto3" json:"ClientID,omitempty"`
 	ClientUUID string `protobuf:"bytes,2,opt,name=ClientUUID,proto3" json:"ClientUUID,omitempty"`
 }
 
@@ -120,11 +120,11 @@ func (*CreateMessageResp) Descriptor() ([]byte, []int) {
 	return file_client_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateMessageResp) GetClientID() string {
+func (x *CreateMessageResp) GetClientID() uint32 {
 	if x != nil {
 		return x.ClientID
 	}
-	return ""
+	return 0
 }
 
 func (x *CreateMessageResp) GetClientUUID() string {
@@ -142,22 +142,22 @@ var file_client_proto_rawDesc = []byte{
 	0x50, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
 	0x52, 0x65, 0x71, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x4b, 0x65, 0x79,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x4b, 0x65,
-	0x79, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x6c, 0x65, 0x69, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x63, 0x6c, 0x65, 0x69, 0x6e, 0x74, 0x54, 0x79, 0x70,
+	0x79, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70,
 	0x65, 0x22, 0x4f, 0x0a, 0x11, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61,
 	0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x1a, 0x0a, 0x08, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
-	0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
 	0x49, 0x44, 0x12, 0x1e, 0x0a, 0x0a, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x55, 0x55, 0x49, 0x44,
 	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x55, 0x55,
-	0x49, 0x44, 0x32, 0x63, 0x0a, 0x0a, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79,
-	0x12, 0x55, 0x0a, 0x0c, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
-	0x12, 0x21, 0x2e, 0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69, 0x65,
-	0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
-	0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43,
+	0x49, 0x44, 0x32, 0x66, 0x0a, 0x0d, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69,
+	0x65, 0x6e, 0x74, 0x12, 0x55, 0x0a, 0x0c, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69,
+	0x65, 0x6e, 0x74, 0x12, 0x21, 0x2e, 0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43,
 	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x73, 0x73,
-	0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x42, 0x13, 0x5a, 0x11, 0x2e, 0x3b, 0x70, 0x62, 0x42,
-	0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41,
+	0x50, 0x49, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d,
+	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x42, 0x13, 0x5a, 0x11, 0x2e, 0x3b,
+	0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -178,8 +178,8 @@ var file_client_proto_goTypes = []interface{}{
 	(*CreateMessageResp)(nil), // 1: pbBaseAPIClient.CreateMessageResp
 }
 var file_client_proto_depIdxs = []int32{
-	0, // 0: pbBaseAPIClient.MsgGateway.CreateClient:input_type -> pbBaseAPIClient.CreateMessageReq
-	1, // 1: pbBaseAPIClient.MsgGateway.CreateClient:output_type -> pbBaseAPIClient.CreateMessageResp
+	0, // 0: pbBaseAPIClient.BaseAPIClient.CreateClient:input_type -> pbBaseAPIClient.CreateMessageReq
+	1, // 1: pbBaseAPIClient.BaseAPIClient.CreateClient:output_type -> pbBaseAPIClient.CreateMessageResp
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -246,72 +246,72 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// MsgGatewayClient is the client API for MsgGateway service.
+// BaseAPIClientClient is the client API for BaseAPIClient service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type MsgGatewayClient interface {
+type BaseAPIClientClient interface {
 	CreateClient(ctx context.Context, in *CreateMessageReq, opts ...grpc.CallOption) (*CreateMessageResp, error)
 }
 
-type msgGatewayClient struct {
+type baseAPIClientClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewMsgGatewayClient(cc grpc.ClientConnInterface) MsgGatewayClient {
-	return &msgGatewayClient{cc}
+func NewBaseAPIClientClient(cc grpc.ClientConnInterface) BaseAPIClientClient {
+	return &baseAPIClientClient{cc}
 }
 
-func (c *msgGatewayClient) CreateClient(ctx context.Context, in *CreateMessageReq, opts ...grpc.CallOption) (*CreateMessageResp, error) {
+func (c *baseAPIClientClient) CreateClient(ctx context.Context, in *CreateMessageReq, opts ...grpc.CallOption) (*CreateMessageResp, error) {
 	out := new(CreateMessageResp)
-	err := c.cc.Invoke(ctx, "/pbBaseAPIClient.MsgGateway/CreateClient", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/pbBaseAPIClient.BaseAPIClient/CreateClient", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// MsgGatewayServer is the server API for MsgGateway service.
-type MsgGatewayServer interface {
+// BaseAPIClientServer is the server API for BaseAPIClient service.
+type BaseAPIClientServer interface {
 	CreateClient(context.Context, *CreateMessageReq) (*CreateMessageResp, error)
 }
 
-// UnimplementedMsgGatewayServer can be embedded to have forward compatible implementations.
-type UnimplementedMsgGatewayServer struct {
+// UnimplementedBaseAPIClientServer can be embedded to have forward compatible implementations.
+type UnimplementedBaseAPIClientServer struct {
 }
 
-func (*UnimplementedMsgGatewayServer) CreateClient(context.Context, *CreateMessageReq) (*CreateMessageResp, error) {
+func (*UnimplementedBaseAPIClientServer) CreateClient(context.Context, *CreateMessageReq) (*CreateMessageResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateClient not implemented")
 }
 
-func RegisterMsgGatewayServer(s *grpc.Server, srv MsgGatewayServer) {
-	s.RegisterService(&_MsgGateway_serviceDesc, srv)
+func RegisterBaseAPIClientServer(s *grpc.Server, srv BaseAPIClientServer) {
+	s.RegisterService(&_BaseAPIClient_serviceDesc, srv)
 }
 
-func _MsgGateway_CreateClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BaseAPIClient_CreateClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateMessageReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgGatewayServer).CreateClient(ctx, in)
+		return srv.(BaseAPIClientServer).CreateClient(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pbBaseAPIClient.MsgGateway/CreateClient",
+		FullMethod: "/pbBaseAPIClient.BaseAPIClient/CreateClient",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgGatewayServer).CreateClient(ctx, req.(*CreateMessageReq))
+		return srv.(BaseAPIClientServer).CreateClient(ctx, req.(*CreateMessageReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _MsgGateway_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "pbBaseAPIClient.MsgGateway",
-	HandlerType: (*MsgGatewayServer)(nil),
+var _BaseAPIClient_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "pbBaseAPIClient.BaseAPIClient",
+	HandlerType: (*BaseAPIClientServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "CreateClient",
-			Handler:    _MsgGateway_CreateClient_Handler,
+			Handler:    _BaseAPIClient_CreateClient_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

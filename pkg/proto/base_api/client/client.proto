@@ -2,17 +2,17 @@ syntax = "proto3";
 package pbBaseAPIClient;
 option go_package = ".;pbBaseAPIClient";
 
-service MsgGateway {
+service BaseAPIClient {
     rpc CreateClient(CreateMessageReq) returns(CreateMessageResp);
 
 }
 
 message CreateMessageReq {
     string secretKey = 1;
-    int32 cleintType = 2;
+    int32 clientType = 2;
 }
 
 message CreateMessageResp {
-    string ClientID=1;
+    uint32 ClientID=1;
     string ClientUUID=2;
 }

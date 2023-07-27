@@ -1,6 +1,12 @@
 package baseAPIClient
 
-import "github.com/gin-gonic/gin"
+import (
+	pbBaseAPIClient "SpiderIM/pkg/proto/base_api/client"
+	"context"
+	"log"
+
+	"github.com/gin-gonic/gin"
+)
 
 // 该模块功能:
 // 1.创建websocket client用户
@@ -21,8 +27,18 @@ func CreateClient(c *gin.Context) {
 		c.JSON(400, gin.H{"errCode": 400, "errMsg": "json data error"})
 		return
 	}
-	
 
+	req := &pbBaseAPIClient.CreateMessageReq{
+		SecretKey:  params.SecretKey,
+		ClientType: int32(params.ClientType),
+	}
 
-	c.JSON(200, gin.H{"errCode": 200, "errMsg": "success"})
+	resp, err := BaseAPIClientSrvClient.CreateClient(context.Background(), req)
+	if err != nil {
+		log.Println("rpc error!")
+		c.JSON(200, gin.H{"errCode": 500, "errMsg": "rpc error"})
+		return
+	}
+	// User存储clientID、clientUUID
+	c.JSON(200, gin.H{"errCode": 200, "errMsg": "success", "clientID": resp.ClientID, "clientUUID": resp.ClientUUID})
 }
