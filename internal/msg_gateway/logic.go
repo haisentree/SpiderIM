@@ -30,11 +30,11 @@ push模块推送消息，直接发送，不经过处理 // serverMsg
 
 // 消息中不需要携带SendID等信息，conn中会包含
 type CommonMsg struct {
-	SendID     int    `json:"sendID" validate:"required"`
-	ClientType int    `json:"clientType" validate:"required"`
-	PlatformID int    `json:"platformID" validate:"required"`
-	ReceID     int    `json:"recvID" validate:"required"`
-	Content    string `json:"content" validate:"required"`
+	// SendID     int    `json:"sendID" validate:"required"`
+	MessageType int    `json:"MessageType" validate:"required"`
+	PlatformID  int    `json:"platformID" validate:"required"`
+	ReceID      int    `json:"recvID" validate:"required"`
+	Content     string `json:"content" validate:"required"`
 }
 
 func (ws *WServer) msgParse(conn *WSClient, binaryMsg []byte) {
@@ -45,7 +45,7 @@ func (ws *WServer) msgParse(conn *WSClient, binaryMsg []byte) {
 		log.Println("validate error:", err)
 		return
 	}
-	switch msg.ClientType {
+	switch msg.MessageType {
 	// 此消息直接发送
 	case 1:
 		log.Println("serverMsg")
@@ -72,7 +72,7 @@ func (ws *WServer) msgParse(conn *WSClient, binaryMsg []byte) {
 		// 	// message2 := []byte(temp)
 		// 	log.Print(resp.ErrMsg)
 		req := &pbMsgGateway.ClientMsgReq{
-			SendID:  int64(msg.SendID), // conn
+			SendID:  int64(conn.clientID), // conn
 			ReceID:  int64(msg.ReceID),
 			Content: msg.Content,
 		}

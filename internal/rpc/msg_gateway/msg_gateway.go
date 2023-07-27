@@ -2,13 +2,16 @@ package rpcMsgGateway
 
 import (
 	"context"
+	"encoding/json"
 	"log"
 	"net"
 	"strconv"
+	"time"
 
 	"google.golang.org/grpc"
 
 	pbMsgGateway "SpiderIM/pkg/proto/msg_gateway"
+	pkgPublic "SpiderIM/pkg/public"
 	"SpiderIM/pkg/rabbitmq"
 )
 
@@ -42,7 +45,22 @@ func (rpc *rpcMsgGateway) ReceiveClientMsg(_ context.Context, req *pbMsgGateway.
 	// zap.S().Info("msg:", req.Message)
 	// zap.S().Info("type:", req.Type)
 	log.Println("receiveClientMsg:", req.Content)
-	MessageProducer.SendMessage([]byte(req.Content))
+
+	currentTime := time.Now().Unix()
+	messageToMQ := &pkgPublic.MessageToMQ{
+		SendID:     req.SendID,
+		RecvID:     req.ReceID,
+		Content:    req.Content,
+		CreateTime: currentTime,
+	}
+
+	toJson, err := json.Marshal(&messageToMQ)
+	if err != nil {
+		log.Println("json marshal fail")
+		return nil, grpc.Errorf(500, "json marshal fail")
+	}
+
+	MessageProducer.SendMessage(toJson)
 	// 这里接收的消息需要存储在mq中
 	return &pbMsgGateway.MessageResp{ErrCode: 200, ErrMsg: "success"}, nil
 }

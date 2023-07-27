@@ -2,6 +2,7 @@ package rpcBaseAPIClient
 
 import (
 	DBMysql "SpiderIM/pkg/db/mysql"
+	DBModel "SpiderIM/pkg/db/mysql/model"
 	pbBaseAPIClient "SpiderIM/pkg/proto/base_api/client"
 	"context"
 	"log"
@@ -28,7 +29,7 @@ func New_rpcBaseAPIClient(port int) *rpcBaseAPIClient {
 
 func (rpc *rpcBaseAPIClient) RpcBaseAPIClient_Init() {
 	MysqlDB.InitMysqlDB()
-	MysqlDB.DB.AutoMigrate(&ClientModel{})
+	MysqlDB.DB.AutoMigrate(&DBModel.Client{})
 }
 
 // client,group,server
@@ -58,7 +59,7 @@ func (rpc *rpcBaseAPIClient) CreateClient(_ context.Context, req *pbBaseAPIClien
 	// 创建client
 	clientUUID := uuid.NewV4().String()
 
-	client := &ClientModel{ClientType: req.ClientType, ClientUUID: clientUUID}
+	client := &DBModel.Client{ClientType: req.ClientType, ClientUUID: clientUUID}
 	result := MysqlDB.DB.Create(client)
 	if result.Error != nil {
 		return &pbBaseAPIClient.CreateMessageResp{}, grpc.Errorf(400, "mysql insert error ")
