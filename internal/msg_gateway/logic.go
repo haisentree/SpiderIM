@@ -28,6 +28,8 @@ push模块推送消息，直接发送，不经过处理 // serverMsg
 }
 */
 
+type SingleMessage
+
 // 消息中不需要携带SendID等信息，conn中会包含
 type CommonMsg struct {
 	// SendID     int    `json:"sendID" validate:"required"`

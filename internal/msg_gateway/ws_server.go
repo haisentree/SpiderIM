@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"sync"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -15,31 +14,19 @@ import (
 	"SpiderIM/pkg/utils"
 )
 
-// 客户端类型说明
-// 1: 内部push客户端
-// 10: 普通用户客户端
-// 20: 群组客户端
-
-// 平台说明
-// 0:内部服务
-// 1:手机
-// 2:PC
-// 3:web
-type WSClient struct {
-	*websocket.Conn
-	platformID int32
-	w          *sync.Mutex
-	// token        string			// 用户和使用clinet的用户信息关联
-	clientID   uint64
-	clinetType int32
-}
-
 // map存在并发安全，读去某个值时候，另一个一个goroutine更新该值，就会panic error
 type WServer struct {
 	wsAddr         string
 	wsMaxConnNum   int
 	wsUpGrader     *websocket.Upgrader
-	wsClientToConn map[uint64]map[int32]*WSClient // map[client_id][platform_id]
+	wsClientToConn map[uint64]map[int32]*WSClient
+}
+
+type WSClient struct {
+	*websocket.Conn
+	platformID int32
+	clientID   uint64
+	clinetType int32
 }
 
 func (ws *WServer) OnInit(wsPort int) {
@@ -64,6 +51,7 @@ func (ws *WServer) Run() {
 
 // 进行websocket连接，连接的时候会进行信息的认证
 func (ws *WServer) wsHandler(w http.ResponseWriter, r *http.Request) {
+
 	// 1.提取clientID、clientUUID参数
 	r.ParseForm()
 	log.Println("request form:", r.Form)
@@ -98,6 +86,7 @@ func (ws *WServer) wsHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println("clientID conv to int fail!")
 		return
 	}
+
 	// 2.查询clientID、clientUUID
 	var dbClient DBModel.Client
 	MysqlDB.DB.Where(&DBModel.Client{ID: uint64(clientID_int)}).First(&dbClient)
@@ -124,46 +113,15 @@ func (ws *WServer) wsHandler(w http.ResponseWriter, r *http.Request) {
 	ws.addClientConn(newConn)
 	// 用户连接成功，对连接的数据进行读取
 	go ws.readMsg(newConn)
-
-	// for {
-	// 	//messageType int, p []byte, err error
-	// 	mt, message, err := conn.ReadMessage()
-	// 	if err != nil {
-	// 		log.Println("read:", err)
-	// 		break
-	// 	}
-	// 	log.Printf("recv: %s", message)
-
-	// 	req := &pbMsgGateway.MessageReq{
-	// 		Type:    "1",
-	// 		Message: string(message),
-	// 	}
-
-	// 	// 将收到的消息发送给rpc后端
-	// 	resp, err := MsgGatewaySrvClient.ReceiveMessage(context.Background(), req)
-	// 	if err != nil {
-	// 		log.Print("test message fail")
-	// 	}
-	// 	// temp := resp.ErrMsg + "test"
-	// 	// message2 := []byte(temp)
-	// 	log.Print(resp.ErrMsg)
-	// err = conn.WriteMessage(websocket.BinaryMessage, []byte("test msg"))
-	// if err != nil {
-	// 	log.Println("write:", err)
-	// }
-	// }
 }
 
 func (ws *WServer) writeMsg(conn *WSClient, msgType int, message []byte) error {
-	// conn.w.Lock()
-	// defer conn.w.Unlock()
 	conn.SetWriteDeadline(time.Now().Add(time.Duration(60) * time.Second))
 	return conn.WriteMessage(msgType, message)
 }
 
 func (ws *WServer) readMsg(conn *WSClient) {
 	for {
-		//messageType int, p []byte, err error
 		msgType, message, err := conn.ReadMessage()
 		if err != nil {
 			if websocket.IsCloseError(err, websocket.CloseNormalClosure, websocket.CloseGoingAway) {
@@ -200,7 +158,7 @@ func (ws *WServer) readMsg(conn *WSClient) {
 				// 3.发送消息
 				for k, v := range ws.wsClientToConn[uint64(messageToMQ.RecvID)] {
 					err := ws.writeMsg(v, websocket.TextMessage, message)
-					log.Println("RecvID is sending platform:",v)
+					log.Println("RecvID is sending platform:", v)
 					if err != nil {
 						log.Println("Sned RecvID error,platform:", k)
 					}
