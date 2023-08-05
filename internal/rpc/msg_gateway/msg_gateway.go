@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc"
 
 	pbMsgGateway "SpiderIM/pkg/proto/msg_gateway"
-	pkgPublic "SpiderIM/pkg/public"
+	pkgPublic "SpiderIM/pkg/public/message"
 	"SpiderIM/pkg/rabbitmq"
 )
 
@@ -34,22 +34,18 @@ func (rpc *rpcMsgGateway) RpcMsgGateway_Init() {
 }
 
 func (rpc *rpcMsgGateway) ReceiveMessage(_ context.Context, req *pbMsgGateway.MessageReq) (*pbMsgGateway.MessageResp, error) {
-	// zap.S().Info("msg:", req.Message)
-	// zap.S().Info("type:", req.Type)
 	log.Println("tpc client")
 
 	return &pbMsgGateway.MessageResp{ErrCode: 200, ErrMsg: "error"}, nil
 }
 
 func (rpc *rpcMsgGateway) ReceiveClientMsg(_ context.Context, req *pbMsgGateway.ClientMsgReq) (*pbMsgGateway.MessageResp, error) {
-	// zap.S().Info("msg:", req.Message)
-	// zap.S().Info("type:", req.Type)
 	log.Println("receiveClientMsg:", req.Content)
 
 	currentTime := time.Now().Unix()
 	messageToMQ := &pkgPublic.MessageToMQ{
-		SendID:     req.SendID,
-		RecvID:     req.ReceID,
+		SendID:     uint64(req.SendID),
+		RecvID:     uint64(req.ReceID),
 		Content:    req.Content,
 		CreateTime: currentTime,
 	}
@@ -63,6 +59,26 @@ func (rpc *rpcMsgGateway) ReceiveClientMsg(_ context.Context, req *pbMsgGateway.
 	MessageProducer.SendMessage(toJson)
 	// 这里接收的消息需要存储在mq中
 	return &pbMsgGateway.MessageResp{ErrCode: 200, ErrMsg: "success"}, nil
+}
+
+func (rpc *rpcMsgGateway) ReceiveSingleMsg(_ context.Context, req *pbMsgGateway.SingleMsgReq) (*pbMsgGateway.SingleMsgResp, error) {
+	log.Println("receiveClientMsg:", req.Content)
+
+	m := &pkgPublic.MessageToMQ{
+		SendID:     req.SendID,
+		RecvID:     req.RecvID,
+		Content:    req.Content,
+		CreateTime: time.Now().Unix(),
+	}
+
+	j, err := json.Marshal(&m)
+	if err != nil {
+		log.Println("json marshal fail")
+		return nil, grpc.Errorf(500, "json marshal fail")
+	}
+
+	MessageProducer.SendMessage(j)
+	return &pbMsgGateway.SingleMsgResp{Code: 200, Message: "success"}, nil
 }
 
 func (rpc *rpcMsgGateway) Run() {

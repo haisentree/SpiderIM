@@ -5,6 +5,7 @@ option go_package = ".;pbMsgGateway";
 service MsgGateway {
     rpc ReceiveMessage(MessageReq) returns(MessageResp);
     rpc ReceiveClientMsg(ClientMsgReq) returns(MessageResp);
+    rpc ReceiveSingleMsg(SingleMsgReq) returns(SingleMsgResp);
 }
 
 message MessageResp {
@@ -26,4 +27,16 @@ message ClientMsgReq {
 message ClientMsgResp {
     int32 errCode = 1;
     string errMsg = 2;
+}
+
+message SingleMsgReq {
+    uint64 sendID = 1;
+    uint64 recvID = 2;
+    string content = 3;
+
+}
+
+message SingleMsgResp {
+    uint32 code = 1;
+    string message = 2;
 }

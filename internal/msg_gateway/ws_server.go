@@ -10,7 +10,7 @@ import (
 	"github.com/gorilla/websocket"
 
 	DBModel "SpiderIM/pkg/db/mysql/model"
-	pkgPublic "SpiderIM/pkg/public"
+	pkgPublic "SpiderIM/pkg/public/message"
 	"SpiderIM/pkg/utils"
 )
 

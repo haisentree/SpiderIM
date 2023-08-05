@@ -7,16 +7,20 @@ import (
 	"log"
 
 	"google.golang.org/grpc"
+
+	"github.com/go-playground/validator/v10"
 )
 
 var (
 	MsgGatewaySrvClient pbMsgGateway.MsgGatewayClient
 	MysqlDB             DBMysql.MysqlDB
+	Validate            *validator.Validate
 )
 
 func init() {
 	SrvClient_Init()
 	DBMysql_Init()
+	Validate_Init()
 }
 
 func SrvClient_Init() {
@@ -31,4 +35,9 @@ func SrvClient_Init() {
 func DBMysql_Init() {
 	MysqlDB.InitMysqlDB()
 	MysqlDB.DB.AutoMigrate(&DBModel.Client{})
+}
+
+func Validate_Init() {
+	v := validator.New()
+	Validate = v
 }
