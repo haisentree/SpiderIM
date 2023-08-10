@@ -1,16 +1,27 @@
 package main
 
 import (
-	DBmongo "SpiderIM/pkg/db/mongodb"
+	DBMysql "SpiderIM/pkg/db/mysql"
+	DBModel "SpiderIM/pkg/db/mysql/model"
+	"fmt"
 )
 
 var (
-	MongoDB DBmongo.MongoDB
+	MysqlDB DBMysql.MysqlDB
 )
 
 func main() {
-	MongoDB.Init_mongodb()
-	// MongoDB.Insert_client_msg()
-	MongoDB.Update_client_msg()
-	// MongoDB.Find_client_msg()
+	MysqlDB.InitMysqlDB()
+	MysqlDB.DB.AutoMigrate(&DBModel.Client{}, &DBModel.ClientToMessage{},&DBModel.ClientMessage{})
+	client := DBModel.NewClient()
+	client.CreateClient(MysqlDB.DB, 1)
+
+	client_to_message := DBModel.NewClientToMessage()
+	client_to_message.CreateClientToMessage(MysqlDB.DB, 4, 2)
+	t := client_to_message.FindByClientIDAndRecvID(MysqlDB.DB, 4, 2)
+
+	client_message := DBModel.NewClientMessage()
+	client_message.CreateMessage(MysqlDB.DB,t,2,"hello")
+
+	fmt.Println("end:", t)
 }

@@ -1,20 +1,37 @@
-package DB
+package DBModel
 
 import (
-	"time"
+	"log"
 
+	pkgError "SpiderIM/pkg/public/error"
+
+	uuid "github.com/satori/go.uuid"
 	"gorm.io/gorm"
 )
 
+// ============================================================================================================
 type Client struct {
-	ID         uint64 `gorm:"primarykey"`
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
-	DeletedAt  gorm.DeletedAt `gorm:"index"`
-	ClientUUID string         `gorm:unique`
-	ClientType int32
+	Base
+	UUID           string `gorm:"unique"`
+	Type           uint8
+	ClientMessages []ClientToMessage
 }
 
 func (Client) TableName() string {
 	return "client"
+}
+
+func NewClient() *Client {
+	c := &Client{}
+	return c
+}
+
+// 创建Client
+func (c *Client) CreateClient(db *gorm.DB, client_type uint8) {
+	c.UUID = uuid.NewV4().String()
+	c.Type = client_type
+	result := db.Create(c)
+	if result.Error != nil {
+		log.Println(pkgError.Mysql_CreateClient_Error)
+	}
 }
