@@ -24,13 +24,7 @@ func (ws *WServer) msgParse(conn *WSClient, binaryMsg []byte) {
 		ws.parseSingleCommMsg(conn, &m)
 	case pkgMessage.Single_Relay_Message_Request:
 		log.Println("serverMsg")
-		// 此处之前出错了，
-		err := ws.writeMsg(conn, websocket.TextMessage, binaryMsg)
-		// err := ws.writeMsg(conn, websocket.BinaryMessage, binaryMsg)
-		if err != nil {
-			log.Println("case1 error:", err)
-		}
-		log.Println("writeMsg SendID:", conn.clientID)
+		ws.parseSingleRelayMsg(conn, &m)
 
 	default:
 		log.Println("clientType error")
@@ -57,4 +51,17 @@ func (ws *WServer) parseSingleCommMsg(conn *WSClient, msg *pkgMessage.CommonMsg)
 	}
 
 	log.Println("clientMsg case 10 resp:", resp.Message)
+}
+
+func (ws *WServer) parseSingleRelayMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
+	d := &pkgMessage.SingleMsgReq{}
+	json.Unmarshal([]byte(msg.Data), &d)
+	if err := Validate.Struct(d); err != nil {
+		log.Println("validate error: 14dd23", err)
+		return
+	}
+
+	if err := ws.writeMsg(conn, websocket.TextMessage, []byte(d.Content)); err != nil {
+		log.Println("case1 error:", err)
+	}
 }

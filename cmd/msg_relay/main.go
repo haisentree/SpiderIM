@@ -82,7 +82,7 @@ func main() {
 
 	// // 读取消息
 	// messageType, p, err := conn.ReadMessage()
-	// if err != nil {
+	// if err != nil { 
 	// 	log.Fatal(err)
 	// }
 
