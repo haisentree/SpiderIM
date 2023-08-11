@@ -1,14 +1,50 @@
 package DBRedis
 
 import (
-	go_redis "github.com/go-redis/redis"
+	"fmt"
+	"strconv"
+
+	"github.com/go-redis/redis"
 )
 
-func Init_redis() *go_redis.Client {
-	rdb := go_redis.NewClient(&go_redis.Options{
-		Addr:     "home.xinxinblog.top:6379",
-		Password: "lxx5102G", // no password set
-		DB:       0,          // use default DB
+type RedisDB struct {
+	RDB *redis.Client
+}
+
+func (r *RedisDB) InitRedisDB() {
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     "192.168.45.128:6379",
+		Password: "lxx123",
+		DB:       0,
 	})
-	return rdb
+	r.RDB = rdb
+}
+
+// 设置client在线状态
+func (r *RedisDB) SetClientStatus(client_id uint64, status bool) {
+	var key string
+	var value bool
+	if status == true {
+		temp := strconv.FormatUint(client_id, 10)
+		key = fmt.Sprintf("%s$status", temp)
+		value = true
+	} else if status == false {
+		temp := strconv.FormatUint(client_id, 10)
+		key = fmt.Sprintf("%s$status", temp)
+		value = false
+	}
+	err := r.RDB.Set(key, value, 0).Err()
+	if err != nil {
+		fmt.Println("err 2133:",err)
+	}
+}
+
+func (r *RedisDB) GetClientStauts(client_id uint64) string {
+	temp := strconv.FormatUint(client_id, 10)
+	key := fmt.Sprintf("%s$status", temp)
+	value, err := r.RDB.Get(key).Result()
+	if err != nil {
+		fmt.Println("email_code reserve fail")
+	}
+	return value
 }

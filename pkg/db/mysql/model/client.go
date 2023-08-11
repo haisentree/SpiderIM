@@ -14,7 +14,7 @@ type Client struct {
 	Base
 	UUID           string `gorm:"unique"`
 	Type           uint8
-	ClientMessages []ClientToMessage
+	ClientToMessages []ClientToMessage
 }
 
 func (Client) TableName() string {
