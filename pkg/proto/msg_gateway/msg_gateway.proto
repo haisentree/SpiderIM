@@ -32,7 +32,8 @@ message ClientMsgResp {
 message SingleMsgReq {
     uint64 sendID = 1;
     uint64 recvID = 2;
-    string content = 3;
+    uint32 msgType = 3;
+    string content = 4;
 
 }
 

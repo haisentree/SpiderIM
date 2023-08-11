@@ -12,9 +12,10 @@ const (
 
 // 消息类型
 const (
-	Single_Common_Message_Request = 1
-	Group_Common_Message_Request  = 2
-	Single_Relay_Message_Request  = 3
+	Single_Common_Message_Request = 1 // client对client发送的单条消息
+	Single_Relay_Message_Request  = 2 // msg_relay从MQ中读取，转发给client
+	Group_Common_Message_Request  = 3 // 该条消息用于存储，不需要转发
+	Group_List_Message_Request   = 4 // 该条消息包含recv数组，需要进行转发消息
 )
 
 // =============================================WServer===============================================
@@ -26,14 +27,24 @@ type CommonMsg struct {
 	Data        string `json:"data" validate:"required"`
 }
 
-type SingleMsgReq struct {
+type SingleCommMsgReq struct {
 	RecvID  uint64 `json:"recv_id" validate:"required"`
 	Content string `json:"content" validate:"required"`
 }
 
-type GroupMsgReq struct {
-	ReceID  []uint64 `json:"recv_id" validate:"required"`
-	Content string   `json:"content" validate:"required"`
+type SingleRelayMsgReq struct {
+	RecvID  uint64 `json:"recv_id" validate:"required"`
+	Content string `json:"content" validate:"required"`
+}
+
+type GroupCommMsgReq struct {
+	ReceID  uint64 `json:"recv_id" validate:"required"`
+	Content string `json:"content" validate:"required"`
+}
+
+type GroupListMsgReq struct {
+	ReceIDList []uint64 `json:"recv_id" validate:"required"`
+	Content    string   `json:"content" validate:"required"`
 }
 
 // websocket接收到的响应消息

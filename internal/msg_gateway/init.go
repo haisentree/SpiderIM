@@ -3,6 +3,7 @@ package MsgGateway
 import (
 	DBMysql "SpiderIM/pkg/db/mysql"
 	DBModel "SpiderIM/pkg/db/mysql/model"
+	DBRedis "SpiderIM/pkg/db/redis"
 	pbMsgGateway "SpiderIM/pkg/proto/msg_gateway"
 	"log"
 
@@ -15,6 +16,7 @@ var (
 	MsgGatewaySrvClient pbMsgGateway.MsgGatewayClient
 	MysqlDB             DBMysql.MysqlDB
 	Validate            *validator.Validate
+	RedisDB             DBRedis.RedisDB
 )
 
 func init() {
@@ -40,4 +42,8 @@ func DBMysql_Init() {
 func Validate_Init() {
 	v := validator.New()
 	Validate = v
+}
+
+func RedisDB_Init() {
+	RedisDB.InitRedisDB()
 }

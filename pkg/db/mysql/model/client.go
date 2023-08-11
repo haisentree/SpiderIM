@@ -12,8 +12,8 @@ import (
 // ============================================================================================================
 type Client struct {
 	Base
-	UUID           string `gorm:"unique"`
-	Type           uint8
+	UUID             string `gorm:"unique"`
+	Type             uint8
 	ClientToMessages []ClientToMessage
 }
 
@@ -34,4 +34,13 @@ func (c *Client) CreateClient(db *gorm.DB, client_type uint8) {
 	if result.Error != nil {
 		log.Println(pkgError.Mysql_CreateClient_Error)
 	}
+}
+
+func (c *Client) FindByClientID(db *gorm.DB, client_id uint64) Client {
+	var client Client
+	result := db.Where("id = ?", client_id).First(&client)
+	if result.Error != nil {
+		log.Println("err 12123")
+	}
+	return client
 }

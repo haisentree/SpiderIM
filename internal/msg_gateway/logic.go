@@ -25,14 +25,16 @@ func (ws *WServer) msgParse(conn *WSClient, binaryMsg []byte) {
 	case pkgMessage.Single_Relay_Message_Request:
 		log.Println("serverMsg")
 		ws.parseSingleRelayMsg(conn, &m)
-
+	case pkgMessage.Group_Common_Message_Request:
+		log.Println("group msg")
+		ws.paraGroupCommMsg(conn,&m)
 	default:
 		log.Println("clientType error")
 	}
 }
 
 func (ws *WServer) parseSingleCommMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
-	d := &pkgMessage.SingleMsgReq{}
+	d := &pkgMessage.SingleCommMsgReq{}
 	json.Unmarshal([]byte(msg.Data), &d)
 	if err := Validate.Struct(d); err != nil {
 		log.Println("validate error: 1423", err)
@@ -54,7 +56,7 @@ func (ws *WServer) parseSingleCommMsg(conn *WSClient, msg *pkgMessage.CommonMsg)
 }
 
 func (ws *WServer) parseSingleRelayMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
-	d := &pkgMessage.SingleMsgReq{}
+	d := &pkgMessage.SingleRelayMsgReq{}
 	json.Unmarshal([]byte(msg.Data), &d)
 	if err := Validate.Struct(d); err != nil {
 		log.Println("validate error: 14dd23", err)
@@ -64,4 +66,8 @@ func (ws *WServer) parseSingleRelayMsg(conn *WSClient, msg *pkgMessage.CommonMsg
 	if err := ws.writeMsg(conn, websocket.TextMessage, []byte(d.Content)); err != nil {
 		log.Println("case1 error:", err)
 	}
+}
+
+func (ws *WServer) paraGroupCommMsg(conn *WSClient,msg *pkgMessage.CommonMsg) {
+
 }

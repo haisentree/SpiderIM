@@ -19,14 +19,14 @@ type WServer struct {
 	wsAddr         string
 	wsMaxConnNum   int
 	wsUpGrader     *websocket.Upgrader
-	wsClientToConn map[uint64]map[int32]*WSClient
+	wsClientToConn map[uint64]map[uint8]*WSClient
 }
 
 type WSClient struct {
 	*websocket.Conn
-	platformID int32
+	platformID uint8
 	clientID   uint64
-	clinetType int32
+	clinetType uint8
 }
 
 func (ws *WServer) OnInit(wsPort int) {
@@ -63,7 +63,7 @@ func (ws *WServer) wsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	clientID_int, err := strconv.Atoi(clientID[0])
+	clientID_uint64, err := strconv.ParseUint(clientID[0], 10, 64)
 	if err != nil {
 		log.Println("clientID conv to int fail!")
 		return
@@ -81,22 +81,22 @@ func (ws *WServer) wsHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println("platformID is none!")
 		return
 	}
-	platformID_int, err := strconv.Atoi(platformID[0])
+	platformID_uint8, err := strconv.ParseUint(platformID[0], 10, 64)
 	if err != nil {
 		log.Println("clientID conv to int fail!")
 		return
 	}
 
 	// 2.查询clientID、clientUUID
-	var dbClient DBModel.Client
-	MysqlDB.DB.Where(&DBModel.Client{ID: uint64(clientID_int)}).First(&dbClient)
-	if dbClient.ClientUUID != clientUUID[0] {
+	dbClient := DBModel.NewClient()
+	dbClient.FindByClientID(MysqlDB.DB, clientID_uint64)
+	if dbClient.UUID != clientUUID[0] {
 		log.Println("uuid error")
 		return
 	}
 
 	// 3.校验plantformID是否合法
-	switch platformID_int {
+	switch platformID_uint8 {
 	case 0, 1, 2, 3:
 		log.Println("platform true")
 	default:
@@ -109,7 +109,7 @@ func (ws *WServer) wsHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	newConn := &WSClient{Conn: conn, platformID: int32(platformID_int), clientID: dbClient.ID, clinetType: dbClient.ClientType}
+	newConn := &WSClient{Conn: conn, platformID: uint8(platformID_uint8), clientID: dbClient.ID, clinetType: dbClient.Type}
 	ws.addClientConn(newConn)
 	// 用户连接成功，对连接的数据进行读取
 	go ws.readMsg(newConn)
@@ -165,6 +165,8 @@ func (ws *WServer) readMsg(conn *WSClient) {
 				}
 
 			} else {
+				// 用户连接再其他的wss,通过redis判断用户是否在线
+				// 后期再改
 				log.Println("RecvID offonline")
 			}
 			// RecvID不在当前wss，message就丢弃
@@ -181,9 +183,10 @@ func (ws *WServer) readMsg(conn *WSClient) {
 }
 
 func (ws *WServer) addClientConn(conn *WSClient) {
-	i := make(map[int32]*WSClient)
+	i := make(map[uint8]*WSClient)
 	i[conn.platformID] = conn
 	ws.wsClientToConn[conn.clientID] = i
+	RedisDB.SetClientStatus(conn.clientID, true)
 	// reids 保存client在线状态
 }
 
@@ -193,6 +196,5 @@ func (ws *WServer) delClientConn(conn *WSClient) {
 	if len(ws.wsClientToConn[conn.clientID]) == 0 {
 		delete(ws.wsClientToConn, conn.clientID)
 	}
+	RedisDB.SetClientStatus(conn.clientID, false)
 }
-
-//======================功能函数=============================
