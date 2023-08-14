@@ -4,6 +4,7 @@ import (
 	DBMysql "SpiderIM/pkg/db/mysql"
 	DBModel "SpiderIM/pkg/db/mysql/model"
 	pbBaseAPIClient "SpiderIM/pkg/proto/base_api/client"
+	pkgMessage "SpiderIM/pkg/public/message"
 	"context"
 	"log"
 	"net"
@@ -34,7 +35,7 @@ func (rpc *rpcBaseAPIClient) RpcBaseAPIClient_Init() {
 
 // client,group,server
 
-func (rpc *rpcBaseAPIClient) CreateClient(_ context.Context, req *pbBaseAPIClient.CreateMessageReq) (*pbBaseAPIClient.CreateMessageResp, error) {
+func (rpc *rpcBaseAPIClient) CreateClient(_ context.Context, req *pbBaseAPIClient.CreateClientReq) (*pbBaseAPIClient.CreateClientResp, error) {
 	// 从配置文件中读取
 	var WsClientCreateKey = "dsfrserererst"
 	var WsServerCreateKey = "sdfdsfdsfsd"
@@ -42,30 +43,44 @@ func (rpc *rpcBaseAPIClient) CreateClient(_ context.Context, req *pbBaseAPIClien
 	// 1.校验key
 	// 如果处理错误，直接return nil，error，不用return空结构体数据
 	switch req.ClientType {
-	case 1:
+	case pkgMessage.Internal_Platform:
 		log.Println("deal server key")
 		if req.SecretKey != WsServerCreateKey {
-			return &pbBaseAPIClient.CreateMessageResp{}, grpc.Errorf(400, "Server Secret Key Fail")
+			return &pbBaseAPIClient.CreateClientResp{}, grpc.Errorf(400, "Server Secret Key Fail")
 		}
-	case 10, 20:
+	case pkgMessage.Android_Platform, pkgMessage.IOS_Platform, pkgMessage.PC_Platform, pkgMessage.Web_Platform:
 		log.Println("deal client key")
 		if req.SecretKey != WsClientCreateKey {
-			return &pbBaseAPIClient.CreateMessageResp{}, grpc.Errorf(400, "Client Secret Key Fail")
+			return &pbBaseAPIClient.CreateClientResp{}, grpc.Errorf(400, "Client Secret Key Fail")
 		}
 	default:
 		log.Println("Secret Key invalid")
-		return &pbBaseAPIClient.CreateMessageResp{}, grpc.Errorf(400, "Secret Key invalid")
+		return &pbBaseAPIClient.CreateClientResp{}, grpc.Errorf(400, "Secret Key invalid")
 	}
 	// 创建client
 	clientUUID := uuid.NewV4().String()
 
-	client := &DBModel.Client{ClientType: req.ClientType, ClientUUID: clientUUID}
+	client := &DBModel.Client{Type: uint8(req.ClientType), UUID: clientUUID}
 	result := MysqlDB.DB.Create(client)
 	if result.Error != nil {
-		return &pbBaseAPIClient.CreateMessageResp{}, grpc.Errorf(400, "mysql insert error ")
+		return &pbBaseAPIClient.CreateClientResp{}, grpc.Errorf(400, "mysql insert error ")
 	}
 	// unit unit32 uni64 int 等类型后期需要统一处理一下
-	return &pbBaseAPIClient.CreateMessageResp{ClientID: uint32(client.ID), ClientUUID: client.ClientUUID}, nil
+	return &pbBaseAPIClient.CreateClientResp{ClientID: client.ID}, nil
+}
+
+func (rpc *rpcBaseAPIClient) CreateClientToMessage(_ context.Context, req *pbBaseAPIClient.CreateClientToMessageReq) (*pbBaseAPIClient.CreateClientToMessaageResp, error) {
+	client_to_msg := DBModel.NewClientToMessage()
+	client_to_msg_id := client_to_msg.CreateClientToMessage(MysqlDB.DB, req.ClientID, req.RecvID)
+	resp := &pbBaseAPIClient.CreateClientToMessaageResp{ClientToMsgID: client_to_msg_id}
+	return resp, nil
+}
+
+func (rpc *rpcBaseAPIClient) CreateCollectToMessage(_ context.Context, req *pbBaseAPIClient.CreateCollectToMessageReq) (*pbBaseAPIClient.CreateCollectToMessageResp, error) {
+	collect_to_msg := DBModel.NewCollectToMessage()
+	collect_to_msg.CreateCollectToMessage(MysqlDB.DB)
+	resp := &pbBaseAPIClient.CreateCollectToMessageResp{CollectToMsgID: 200}
+	return resp, nil
 }
 
 func (rpc *rpcBaseAPIClient) Run() {

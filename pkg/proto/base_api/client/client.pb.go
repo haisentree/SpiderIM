@@ -24,17 +24,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type CreateMessageReq struct {
+type CreateClientReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	SecretKey  string `protobuf:"bytes,1,opt,name=secretKey,proto3" json:"secretKey,omitempty"`
-	ClientType int32  `protobuf:"varint,2,opt,name=clientType,proto3" json:"clientType,omitempty"`
+	ClientType uint32 `protobuf:"varint,2,opt,name=clientType,proto3" json:"clientType,omitempty"`
 }
 
-func (x *CreateMessageReq) Reset() {
-	*x = CreateMessageReq{}
+func (x *CreateClientReq) Reset() {
+	*x = CreateClientReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_client_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -42,13 +42,13 @@ func (x *CreateMessageReq) Reset() {
 	}
 }
 
-func (x *CreateMessageReq) String() string {
+func (x *CreateClientReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateMessageReq) ProtoMessage() {}
+func (*CreateClientReq) ProtoMessage() {}
 
-func (x *CreateMessageReq) ProtoReflect() protoreflect.Message {
+func (x *CreateClientReq) ProtoReflect() protoreflect.Message {
 	mi := &file_client_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -60,36 +60,35 @@ func (x *CreateMessageReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateMessageReq.ProtoReflect.Descriptor instead.
-func (*CreateMessageReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateClientReq.ProtoReflect.Descriptor instead.
+func (*CreateClientReq) Descriptor() ([]byte, []int) {
 	return file_client_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *CreateMessageReq) GetSecretKey() string {
+func (x *CreateClientReq) GetSecretKey() string {
 	if x != nil {
 		return x.SecretKey
 	}
 	return ""
 }
 
-func (x *CreateMessageReq) GetClientType() int32 {
+func (x *CreateClientReq) GetClientType() uint32 {
 	if x != nil {
 		return x.ClientType
 	}
 	return 0
 }
 
-type CreateMessageResp struct {
+type CreateClientResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ClientID   uint32 `protobuf:"varint,1,opt,name=ClientID,proto3" json:"ClientID,omitempty"`
-	ClientUUID string `protobuf:"bytes,2,opt,name=ClientUUID,proto3" json:"ClientUUID,omitempty"`
+	ClientID uint64 `protobuf:"varint,1,opt,name=clientID,proto3" json:"clientID,omitempty"`
 }
 
-func (x *CreateMessageResp) Reset() {
-	*x = CreateMessageResp{}
+func (x *CreateClientResp) Reset() {
+	*x = CreateClientResp{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_client_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -97,13 +96,13 @@ func (x *CreateMessageResp) Reset() {
 	}
 }
 
-func (x *CreateMessageResp) String() string {
+func (x *CreateClientResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreateMessageResp) ProtoMessage() {}
+func (*CreateClientResp) ProtoMessage() {}
 
-func (x *CreateMessageResp) ProtoReflect() protoreflect.Message {
+func (x *CreateClientResp) ProtoReflect() protoreflect.Message {
 	mi := &file_client_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -115,23 +114,212 @@ func (x *CreateMessageResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreateMessageResp.ProtoReflect.Descriptor instead.
-func (*CreateMessageResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateClientResp.ProtoReflect.Descriptor instead.
+func (*CreateClientResp) Descriptor() ([]byte, []int) {
 	return file_client_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateMessageResp) GetClientID() uint32 {
+func (x *CreateClientResp) GetClientID() uint64 {
 	if x != nil {
 		return x.ClientID
 	}
 	return 0
 }
 
-func (x *CreateMessageResp) GetClientUUID() string {
-	if x != nil {
-		return x.ClientUUID
+type CreateClientToMessageReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClientID uint64 `protobuf:"varint,1,opt,name=clientID,proto3" json:"clientID,omitempty"`
+	RecvID   uint64 `protobuf:"varint,2,opt,name=recvID,proto3" json:"recvID,omitempty"`
+}
+
+func (x *CreateClientToMessageReq) Reset() {
+	*x = CreateClientToMessageReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_client_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
 	}
-	return ""
+}
+
+func (x *CreateClientToMessageReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateClientToMessageReq) ProtoMessage() {}
+
+func (x *CreateClientToMessageReq) ProtoReflect() protoreflect.Message {
+	mi := &file_client_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateClientToMessageReq.ProtoReflect.Descriptor instead.
+func (*CreateClientToMessageReq) Descriptor() ([]byte, []int) {
+	return file_client_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CreateClientToMessageReq) GetClientID() uint64 {
+	if x != nil {
+		return x.ClientID
+	}
+	return 0
+}
+
+func (x *CreateClientToMessageReq) GetRecvID() uint64 {
+	if x != nil {
+		return x.RecvID
+	}
+	return 0
+}
+
+type CreateClientToMessaageResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClientToMsgID uint64 `protobuf:"varint,1,opt,name=clientToMsgID,proto3" json:"clientToMsgID,omitempty"`
+}
+
+func (x *CreateClientToMessaageResp) Reset() {
+	*x = CreateClientToMessaageResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_client_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateClientToMessaageResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateClientToMessaageResp) ProtoMessage() {}
+
+func (x *CreateClientToMessaageResp) ProtoReflect() protoreflect.Message {
+	mi := &file_client_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateClientToMessaageResp.ProtoReflect.Descriptor instead.
+func (*CreateClientToMessaageResp) Descriptor() ([]byte, []int) {
+	return file_client_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CreateClientToMessaageResp) GetClientToMsgID() uint64 {
+	if x != nil {
+		return x.ClientToMsgID
+	}
+	return 0
+}
+
+type CreateCollectToMessageReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Create bool `protobuf:"varint,1,opt,name=create,proto3" json:"create,omitempty"`
+}
+
+func (x *CreateCollectToMessageReq) Reset() {
+	*x = CreateCollectToMessageReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_client_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateCollectToMessageReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateCollectToMessageReq) ProtoMessage() {}
+
+func (x *CreateCollectToMessageReq) ProtoReflect() protoreflect.Message {
+	mi := &file_client_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateCollectToMessageReq.ProtoReflect.Descriptor instead.
+func (*CreateCollectToMessageReq) Descriptor() ([]byte, []int) {
+	return file_client_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CreateCollectToMessageReq) GetCreate() bool {
+	if x != nil {
+		return x.Create
+	}
+	return false
+}
+
+type CreateCollectToMessageResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CollectToMsgID uint32 `protobuf:"varint,1,opt,name=collectToMsgID,proto3" json:"collectToMsgID,omitempty"`
+}
+
+func (x *CreateCollectToMessageResp) Reset() {
+	*x = CreateCollectToMessageResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_client_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateCollectToMessageResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateCollectToMessageResp) ProtoMessage() {}
+
+func (x *CreateCollectToMessageResp) ProtoReflect() protoreflect.Message {
+	mi := &file_client_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateCollectToMessageResp.ProtoReflect.Descriptor instead.
+func (*CreateCollectToMessageResp) Descriptor() ([]byte, []int) {
+	return file_client_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *CreateCollectToMessageResp) GetCollectToMsgID() uint32 {
+	if x != nil {
+		return x.CollectToMsgID
+	}
+	return 0
 }
 
 var File_client_proto protoreflect.FileDescriptor
@@ -139,22 +327,51 @@ var File_client_proto protoreflect.FileDescriptor
 var file_client_proto_rawDesc = []byte{
 	0x0a, 0x0c, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0f,
 	0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x22,
-	0x50, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
-	0x52, 0x65, 0x71, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x4b, 0x65, 0x79,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x4b, 0x65,
-	0x79, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70,
-	0x65, 0x22, 0x4f, 0x0a, 0x11, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x73, 0x73, 0x61,
-	0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x1a, 0x0a, 0x08, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
-	0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
-	0x49, 0x44, 0x12, 0x1e, 0x0a, 0x0a, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x55, 0x55, 0x49, 0x44,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x55, 0x55,
-	0x49, 0x44, 0x32, 0x66, 0x0a, 0x0d, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69,
-	0x65, 0x6e, 0x74, 0x12, 0x55, 0x0a, 0x0c, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69,
-	0x65, 0x6e, 0x74, 0x12, 0x21, 0x2e, 0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43,
-	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d, 0x65, 0x73, 0x73,
-	0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41,
-	0x50, 0x49, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4d,
+	0x4f, 0x0a, 0x0f, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x52,
+	0x65, 0x71, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x4b, 0x65, 0x79, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x4b, 0x65, 0x79,
+	0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x0d, 0x52, 0x0a, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x79, 0x70, 0x65,
+	0x22, 0x2e, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44,
+	0x22, 0x4e, 0x0a, 0x18, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x54, 0x6f, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x12, 0x1a, 0x0a, 0x08,
+	0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08,
+	0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x63, 0x76,
+	0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x72, 0x65, 0x63, 0x76, 0x49, 0x44,
+	0x22, 0x42, 0x0a, 0x1a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x54, 0x6f, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x24,
+	0x0a, 0x0d, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f, 0x4d, 0x73, 0x67, 0x49, 0x44, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0d, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f, 0x4d,
+	0x73, 0x67, 0x49, 0x44, 0x22, 0x33, 0x0a, 0x19, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6f,
+	0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65,
+	0x71, 0x12, 0x16, 0x0a, 0x06, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x06, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x22, 0x44, 0x0a, 0x1a, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x4d, 0x65, 0x73, 0x73,
+	0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x26, 0x0a, 0x0e, 0x63, 0x6f, 0x6c, 0x6c, 0x65,
+	0x63, 0x74, 0x54, 0x6f, 0x4d, 0x73, 0x67, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52,
+	0x0e, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x4d, 0x73, 0x67, 0x49, 0x44, 0x32,
+	0xc8, 0x02, 0x0a, 0x0d, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69, 0x65, 0x6e,
+	0x74, 0x12, 0x53, 0x0a, 0x0c, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e,
+	0x74, 0x12, 0x20, 0x2e, 0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69,
+	0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x52, 0x65, 0x71, 0x1a, 0x21, 0x2e, 0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65,
+	0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x6f, 0x0a, 0x15, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x12,
+	0x29, 0x2e, 0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69, 0x65, 0x6e,
+	0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f,
+	0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x2b, 0x2e, 0x70, 0x62, 0x42,
+	0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f, 0x4d, 0x65, 0x73, 0x73, 0x61,
+	0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x71, 0x0a, 0x16, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x12, 0x2a, 0x2e, 0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69,
+	0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63,
+	0x74, 0x54, 0x6f, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x2b, 0x2e,
+	0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x2e,
+	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x4d,
 	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x42, 0x13, 0x5a, 0x11, 0x2e, 0x3b,
 	0x70, 0x62, 0x42, 0x61, 0x73, 0x65, 0x41, 0x50, 0x49, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x62,
 	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
@@ -172,16 +389,24 @@ func file_client_proto_rawDescGZIP() []byte {
 	return file_client_proto_rawDescData
 }
 
-var file_client_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_client_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_client_proto_goTypes = []interface{}{
-	(*CreateMessageReq)(nil),  // 0: pbBaseAPIClient.CreateMessageReq
-	(*CreateMessageResp)(nil), // 1: pbBaseAPIClient.CreateMessageResp
+	(*CreateClientReq)(nil),            // 0: pbBaseAPIClient.CreateClientReq
+	(*CreateClientResp)(nil),           // 1: pbBaseAPIClient.CreateClientResp
+	(*CreateClientToMessageReq)(nil),   // 2: pbBaseAPIClient.CreateClientToMessageReq
+	(*CreateClientToMessaageResp)(nil), // 3: pbBaseAPIClient.CreateClientToMessaageResp
+	(*CreateCollectToMessageReq)(nil),  // 4: pbBaseAPIClient.CreateCollectToMessageReq
+	(*CreateCollectToMessageResp)(nil), // 5: pbBaseAPIClient.CreateCollectToMessageResp
 }
 var file_client_proto_depIdxs = []int32{
-	0, // 0: pbBaseAPIClient.BaseAPIClient.CreateClient:input_type -> pbBaseAPIClient.CreateMessageReq
-	1, // 1: pbBaseAPIClient.BaseAPIClient.CreateClient:output_type -> pbBaseAPIClient.CreateMessageResp
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // 0: pbBaseAPIClient.BaseAPIClient.CreateClient:input_type -> pbBaseAPIClient.CreateClientReq
+	2, // 1: pbBaseAPIClient.BaseAPIClient.CreateClientToMessage:input_type -> pbBaseAPIClient.CreateClientToMessageReq
+	4, // 2: pbBaseAPIClient.BaseAPIClient.CreateCollectToMessage:input_type -> pbBaseAPIClient.CreateCollectToMessageReq
+	1, // 3: pbBaseAPIClient.BaseAPIClient.CreateClient:output_type -> pbBaseAPIClient.CreateClientResp
+	3, // 4: pbBaseAPIClient.BaseAPIClient.CreateClientToMessage:output_type -> pbBaseAPIClient.CreateClientToMessaageResp
+	5, // 5: pbBaseAPIClient.BaseAPIClient.CreateCollectToMessage:output_type -> pbBaseAPIClient.CreateCollectToMessageResp
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -194,7 +419,7 @@ func file_client_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_client_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateMessageReq); i {
+			switch v := v.(*CreateClientReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -206,7 +431,55 @@ func file_client_proto_init() {
 			}
 		}
 		file_client_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateMessageResp); i {
+			switch v := v.(*CreateClientResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_client_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateClientToMessageReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_client_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateClientToMessaageResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_client_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateCollectToMessageReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_client_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateCollectToMessageResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -224,7 +497,7 @@ func file_client_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_client_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -250,7 +523,9 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type BaseAPIClientClient interface {
-	CreateClient(ctx context.Context, in *CreateMessageReq, opts ...grpc.CallOption) (*CreateMessageResp, error)
+	CreateClient(ctx context.Context, in *CreateClientReq, opts ...grpc.CallOption) (*CreateClientResp, error)
+	CreateClientToMessage(ctx context.Context, in *CreateClientToMessageReq, opts ...grpc.CallOption) (*CreateClientToMessaageResp, error)
+	CreateCollectToMessage(ctx context.Context, in *CreateCollectToMessageReq, opts ...grpc.CallOption) (*CreateCollectToMessageResp, error)
 }
 
 type baseAPIClientClient struct {
@@ -261,9 +536,27 @@ func NewBaseAPIClientClient(cc grpc.ClientConnInterface) BaseAPIClientClient {
 	return &baseAPIClientClient{cc}
 }
 
-func (c *baseAPIClientClient) CreateClient(ctx context.Context, in *CreateMessageReq, opts ...grpc.CallOption) (*CreateMessageResp, error) {
-	out := new(CreateMessageResp)
+func (c *baseAPIClientClient) CreateClient(ctx context.Context, in *CreateClientReq, opts ...grpc.CallOption) (*CreateClientResp, error) {
+	out := new(CreateClientResp)
 	err := c.cc.Invoke(ctx, "/pbBaseAPIClient.BaseAPIClient/CreateClient", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *baseAPIClientClient) CreateClientToMessage(ctx context.Context, in *CreateClientToMessageReq, opts ...grpc.CallOption) (*CreateClientToMessaageResp, error) {
+	out := new(CreateClientToMessaageResp)
+	err := c.cc.Invoke(ctx, "/pbBaseAPIClient.BaseAPIClient/CreateClientToMessage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *baseAPIClientClient) CreateCollectToMessage(ctx context.Context, in *CreateCollectToMessageReq, opts ...grpc.CallOption) (*CreateCollectToMessageResp, error) {
+	out := new(CreateCollectToMessageResp)
+	err := c.cc.Invoke(ctx, "/pbBaseAPIClient.BaseAPIClient/CreateCollectToMessage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -272,15 +565,23 @@ func (c *baseAPIClientClient) CreateClient(ctx context.Context, in *CreateMessag
 
 // BaseAPIClientServer is the server API for BaseAPIClient service.
 type BaseAPIClientServer interface {
-	CreateClient(context.Context, *CreateMessageReq) (*CreateMessageResp, error)
+	CreateClient(context.Context, *CreateClientReq) (*CreateClientResp, error)
+	CreateClientToMessage(context.Context, *CreateClientToMessageReq) (*CreateClientToMessaageResp, error)
+	CreateCollectToMessage(context.Context, *CreateCollectToMessageReq) (*CreateCollectToMessageResp, error)
 }
 
 // UnimplementedBaseAPIClientServer can be embedded to have forward compatible implementations.
 type UnimplementedBaseAPIClientServer struct {
 }
 
-func (*UnimplementedBaseAPIClientServer) CreateClient(context.Context, *CreateMessageReq) (*CreateMessageResp, error) {
+func (*UnimplementedBaseAPIClientServer) CreateClient(context.Context, *CreateClientReq) (*CreateClientResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateClient not implemented")
+}
+func (*UnimplementedBaseAPIClientServer) CreateClientToMessage(context.Context, *CreateClientToMessageReq) (*CreateClientToMessaageResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateClientToMessage not implemented")
+}
+func (*UnimplementedBaseAPIClientServer) CreateCollectToMessage(context.Context, *CreateCollectToMessageReq) (*CreateCollectToMessageResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCollectToMessage not implemented")
 }
 
 func RegisterBaseAPIClientServer(s *grpc.Server, srv BaseAPIClientServer) {
@@ -288,7 +589,7 @@ func RegisterBaseAPIClientServer(s *grpc.Server, srv BaseAPIClientServer) {
 }
 
 func _BaseAPIClient_CreateClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateMessageReq)
+	in := new(CreateClientReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -300,7 +601,43 @@ func _BaseAPIClient_CreateClient_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/pbBaseAPIClient.BaseAPIClient/CreateClient",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BaseAPIClientServer).CreateClient(ctx, req.(*CreateMessageReq))
+		return srv.(BaseAPIClientServer).CreateClient(ctx, req.(*CreateClientReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BaseAPIClient_CreateClientToMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateClientToMessageReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BaseAPIClientServer).CreateClientToMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pbBaseAPIClient.BaseAPIClient/CreateClientToMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BaseAPIClientServer).CreateClientToMessage(ctx, req.(*CreateClientToMessageReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BaseAPIClient_CreateCollectToMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCollectToMessageReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BaseAPIClientServer).CreateCollectToMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pbBaseAPIClient.BaseAPIClient/CreateCollectToMessage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BaseAPIClientServer).CreateCollectToMessage(ctx, req.(*CreateCollectToMessageReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -312,6 +649,14 @@ var _BaseAPIClient_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateClient",
 			Handler:    _BaseAPIClient_CreateClient_Handler,
+		},
+		{
+			MethodName: "CreateClientToMessage",
+			Handler:    _BaseAPIClient_CreateClientToMessage_Handler,
+		},
+		{
+			MethodName: "CreateCollectToMessage",
+			Handler:    _BaseAPIClient_CreateCollectToMessage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

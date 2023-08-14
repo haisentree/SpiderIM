@@ -27,7 +27,7 @@ func NewClientToMessage() *ClientToMessage {
 }
 
 // 创建ClientMessage
-func (c *ClientToMessage) CreateClientToMessage(db *gorm.DB, client_id uint64, recv_id uint64) {
+func (c *ClientToMessage) CreateClientToMessage(db *gorm.DB, client_id uint64, recv_id uint64) uint64 {
 	c.ClientID = client_id
 	c.RecvID = recv_id
 	c.MinSeq = 1
@@ -36,15 +36,16 @@ func (c *ClientToMessage) CreateClientToMessage(db *gorm.DB, client_id uint64, r
 	if result.Error != nil {
 		log.Println(pkgError.Mysql_CreateClientMessage_Error)
 	}
+	return c.ID
 }
 
-func (c *ClientToMessage) FindByClientIDAndRecvID(db *gorm.DB, client_id uint64, recv_id uint64) uint64 {
+func (c *ClientToMessage) FindByClientIDAndRecvID(db *gorm.DB, client_id uint64, recv_id uint64) ClientToMessage {
 	var client_to_message ClientToMessage
 	db.Where("client_id = ? AND recv_id = ?", client_id, recv_id).First(&client_to_message)
-	return client_to_message.ID
+	return client_to_message
 }
 
-func (c *ClientToMessage) FindMaxSeq(db *gorm.DB, client_to_message_id uint64) uint64 {
+func (c *ClientToMessage) FindMaxSeqByID(db *gorm.DB, client_to_message_id uint64) uint64 {
 	var client_to_message ClientToMessage
 	result := db.First(&client_to_message, client_to_message_id)
 	if result.Error != nil {
@@ -123,6 +124,28 @@ func (c *CollectToMessage) CreateCollectToMessage(db *gorm.DB) {
 	result := db.Create(c)
 	if result.Error != nil {
 		log.Println("err 2132")
+	}
+}
+
+func (c *CollectToMessage) FindByCollectID(db *gorm.DB, collect_to_msg_id uint64) CollectToMessage {
+	var collect_to_message CollectToMessage
+	result := db.First(&collect_to_message, collect_to_msg_id)
+	if result.Error != nil {
+		log.Println("23546")
+	}
+	return collect_to_message
+}
+
+func (c *CollectToMessage) IncMaxseq(db *gorm.DB, collect_to_msg_id uint64) {
+	var collect_to_message CollectToMessage
+	r1 := db.First(&collect_to_message, collect_to_msg_id)
+	if r1.Error != nil {
+		log.Println("23546")
+	}
+	collect_to_message.MaxSeq = collect_to_message.MaxSeq + 1
+	r2 := db.Save(collect_to_message)
+	if r2.Error != nil {
+		log.Println("err 32ddds23")
 	}
 }
 

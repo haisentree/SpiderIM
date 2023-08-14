@@ -27,7 +27,7 @@ func (ws *WServer) msgParse(conn *WSClient, binaryMsg []byte) {
 		ws.parseSingleRelayMsg(conn, &m)
 	case pkgMessage.Group_Common_Message_Request:
 		log.Println("group msg")
-		ws.paraGroupCommMsg(conn,&m)
+		ws.paraGroupCommMsg(conn, &m)
 	default:
 		log.Println("clientType error")
 	}
@@ -44,6 +44,7 @@ func (ws *WServer) parseSingleCommMsg(conn *WSClient, msg *pkgMessage.CommonMsg)
 	req := &pbMsgGateway.SingleMsgReq{
 		SendID:  msg.SendID,
 		RecvID:  d.RecvID,
+		MsgType: uint32(msg.MessageType),
 		Content: d.Content,
 	}
 
@@ -68,6 +69,50 @@ func (ws *WServer) parseSingleRelayMsg(conn *WSClient, msg *pkgMessage.CommonMsg
 	}
 }
 
-func (ws *WServer) paraGroupCommMsg(conn *WSClient,msg *pkgMessage.CommonMsg) {
+func (ws *WServer) paraGroupCommMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
+	d := &pkgMessage.GroupCommMsgReq{}
+	json.Unmarshal([]byte(msg.Data), &d)
+	if err := Validate.Struct(d); err != nil {
+		log.Println("validate error: 1423", err)
+		return
+	}
 
+	req := &pbMsgGateway.SingleMsgReq{
+		SendID:  msg.SendID,
+		RecvID:  d.RecvID,
+		MsgType: uint32(msg.MessageType),
+		Content: d.Content,
+	}
+
+	resp, err := MsgGatewaySrvClient.ReceiveSingleMsg(context.Background(), req)
+	if err != nil {
+		log.Println("case 10afs error")
+	}
+
+	log.Println("clientMsg case 10 resp:", resp.Message)
+
+}
+
+func (ws *WServer) paraGroupListMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
+	d := &pkgMessage.GroupListMsgReq{}
+	json.Unmarshal([]byte(msg.Data), &d)
+	if err := Validate.Struct(d); err != nil {
+		log.Println("validate error: 1423", err)
+		return
+	}
+
+	req := &pbMsgGateway.ListMsgReq{
+		SendID:  msg.SendID,
+		RecvID:  d.RecvIDList,
+		MsgType: uint32(msg.MessageType),
+		SeqID: d.SeqID,
+		Content: d.Content,
+	}
+
+	resp, err := MsgGatewaySrvClient.ReceiveLisgMsg(context.Background(), req)
+	if err != nil {
+		log.Println("case 10afs error")
+	}
+
+	log.Println("clientMsg case 10 resp:", resp.Message)
 }

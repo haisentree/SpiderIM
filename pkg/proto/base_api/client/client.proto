@@ -3,16 +3,34 @@ package pbBaseAPIClient;
 option go_package = ".;pbBaseAPIClient";
 
 service BaseAPIClient {
-    rpc CreateClient(CreateMessageReq) returns(CreateMessageResp);
-
+    rpc CreateClient(CreateClientReq) returns(CreateClientResp);
+    rpc CreateClientToMessage(CreateClientToMessageReq) returns(CreateClientToMessaageResp);
+    rpc CreateCollectToMessage(CreateCollectToMessageReq) returns(CreateCollectToMessageResp);
 }
 
-message CreateMessageReq {
+message CreateClientReq {
     string secretKey = 1;
-    int32 clientType = 2;
+    uint32 clientType = 2;
 }
 
-message CreateMessageResp {
-    uint32 ClientID=1;
-    string ClientUUID=2;
+message CreateClientResp {
+    uint64 clientID=1;
+}
+
+message CreateClientToMessageReq {
+    uint64 clientID = 1;
+    uint64 recvID = 2;
+}
+
+message CreateClientToMessaageResp{
+
+    uint64 clientToMsgID = 1;
+}   
+
+message CreateCollectToMessageReq{
+    bool create = 1;
+}
+
+message CreateCollectToMessageResp {
+    uint32 collectToMsgID = 1;
 }

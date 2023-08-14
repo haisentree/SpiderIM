@@ -24,234 +24,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type MessageResp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	ErrCode int32  `protobuf:"varint,1,opt,name=errCode,proto3" json:"errCode,omitempty"`
-	ErrMsg  string `protobuf:"bytes,2,opt,name=errMsg,proto3" json:"errMsg,omitempty"`
-}
-
-func (x *MessageResp) Reset() {
-	*x = MessageResp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_msg_gateway_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *MessageResp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MessageResp) ProtoMessage() {}
-
-func (x *MessageResp) ProtoReflect() protoreflect.Message {
-	mi := &file_msg_gateway_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MessageResp.ProtoReflect.Descriptor instead.
-func (*MessageResp) Descriptor() ([]byte, []int) {
-	return file_msg_gateway_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *MessageResp) GetErrCode() int32 {
-	if x != nil {
-		return x.ErrCode
-	}
-	return 0
-}
-
-func (x *MessageResp) GetErrMsg() string {
-	if x != nil {
-		return x.ErrMsg
-	}
-	return ""
-}
-
-type MessageReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Type    string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
-}
-
-func (x *MessageReq) Reset() {
-	*x = MessageReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_msg_gateway_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *MessageReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*MessageReq) ProtoMessage() {}
-
-func (x *MessageReq) ProtoReflect() protoreflect.Message {
-	mi := &file_msg_gateway_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use MessageReq.ProtoReflect.Descriptor instead.
-func (*MessageReq) Descriptor() ([]byte, []int) {
-	return file_msg_gateway_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *MessageReq) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
-}
-
-func (x *MessageReq) GetMessage() string {
-	if x != nil {
-		return x.Message
-	}
-	return ""
-}
-
-type ClientMsgReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	SendID  int64  `protobuf:"varint,1,opt,name=sendID,proto3" json:"sendID,omitempty"`
-	ReceID  int64  `protobuf:"varint,2,opt,name=receID,proto3" json:"receID,omitempty"`
-	Content string `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
-}
-
-func (x *ClientMsgReq) Reset() {
-	*x = ClientMsgReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_msg_gateway_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ClientMsgReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClientMsgReq) ProtoMessage() {}
-
-func (x *ClientMsgReq) ProtoReflect() protoreflect.Message {
-	mi := &file_msg_gateway_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ClientMsgReq.ProtoReflect.Descriptor instead.
-func (*ClientMsgReq) Descriptor() ([]byte, []int) {
-	return file_msg_gateway_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *ClientMsgReq) GetSendID() int64 {
-	if x != nil {
-		return x.SendID
-	}
-	return 0
-}
-
-func (x *ClientMsgReq) GetReceID() int64 {
-	if x != nil {
-		return x.ReceID
-	}
-	return 0
-}
-
-func (x *ClientMsgReq) GetContent() string {
-	if x != nil {
-		return x.Content
-	}
-	return ""
-}
-
-type ClientMsgResp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	ErrCode int32  `protobuf:"varint,1,opt,name=errCode,proto3" json:"errCode,omitempty"`
-	ErrMsg  string `protobuf:"bytes,2,opt,name=errMsg,proto3" json:"errMsg,omitempty"`
-}
-
-func (x *ClientMsgResp) Reset() {
-	*x = ClientMsgResp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_msg_gateway_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ClientMsgResp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClientMsgResp) ProtoMessage() {}
-
-func (x *ClientMsgResp) ProtoReflect() protoreflect.Message {
-	mi := &file_msg_gateway_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ClientMsgResp.ProtoReflect.Descriptor instead.
-func (*ClientMsgResp) Descriptor() ([]byte, []int) {
-	return file_msg_gateway_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *ClientMsgResp) GetErrCode() int32 {
-	if x != nil {
-		return x.ErrCode
-	}
-	return 0
-}
-
-func (x *ClientMsgResp) GetErrMsg() string {
-	if x != nil {
-		return x.ErrMsg
-	}
-	return ""
-}
-
 type SingleMsgReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -259,13 +31,14 @@ type SingleMsgReq struct {
 
 	SendID  uint64 `protobuf:"varint,1,opt,name=sendID,proto3" json:"sendID,omitempty"`
 	RecvID  uint64 `protobuf:"varint,2,opt,name=recvID,proto3" json:"recvID,omitempty"`
-	Content string `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
+	MsgType uint32 `protobuf:"varint,3,opt,name=msgType,proto3" json:"msgType,omitempty"`
+	Content string `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
 }
 
 func (x *SingleMsgReq) Reset() {
 	*x = SingleMsgReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_msg_gateway_proto_msgTypes[4]
+		mi := &file_msg_gateway_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -278,7 +51,7 @@ func (x *SingleMsgReq) String() string {
 func (*SingleMsgReq) ProtoMessage() {}
 
 func (x *SingleMsgReq) ProtoReflect() protoreflect.Message {
-	mi := &file_msg_gateway_proto_msgTypes[4]
+	mi := &file_msg_gateway_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -291,7 +64,7 @@ func (x *SingleMsgReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SingleMsgReq.ProtoReflect.Descriptor instead.
 func (*SingleMsgReq) Descriptor() ([]byte, []int) {
-	return file_msg_gateway_proto_rawDescGZIP(), []int{4}
+	return file_msg_gateway_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *SingleMsgReq) GetSendID() uint64 {
@@ -304,6 +77,13 @@ func (x *SingleMsgReq) GetSendID() uint64 {
 func (x *SingleMsgReq) GetRecvID() uint64 {
 	if x != nil {
 		return x.RecvID
+	}
+	return 0
+}
+
+func (x *SingleMsgReq) GetMsgType() uint32 {
+	if x != nil {
+		return x.MsgType
 	}
 	return 0
 }
@@ -327,7 +107,7 @@ type SingleMsgResp struct {
 func (x *SingleMsgResp) Reset() {
 	*x = SingleMsgResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_msg_gateway_proto_msgTypes[5]
+		mi := &file_msg_gateway_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -340,7 +120,7 @@ func (x *SingleMsgResp) String() string {
 func (*SingleMsgResp) ProtoMessage() {}
 
 func (x *SingleMsgResp) ProtoReflect() protoreflect.Message {
-	mi := &file_msg_gateway_proto_msgTypes[5]
+	mi := &file_msg_gateway_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -353,7 +133,7 @@ func (x *SingleMsgResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SingleMsgResp.ProtoReflect.Descriptor instead.
 func (*SingleMsgResp) Descriptor() ([]byte, []int) {
-	return file_msg_gateway_proto_rawDescGZIP(), []int{5}
+	return file_msg_gateway_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *SingleMsgResp) GetCode() uint32 {
@@ -370,55 +150,181 @@ func (x *SingleMsgResp) GetMessage() string {
 	return ""
 }
 
+type ListMsgReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SendID  uint64   `protobuf:"varint,1,opt,name=sendID,proto3" json:"sendID,omitempty"`
+	RecvID  []uint64 `protobuf:"varint,2,rep,packed,name=recvID,proto3" json:"recvID,omitempty"`
+	MsgType uint32   `protobuf:"varint,3,opt,name=msgType,proto3" json:"msgType,omitempty"`
+	SeqID   uint64   `protobuf:"varint,4,opt,name=seqID,proto3" json:"seqID,omitempty"`
+	Content string   `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
+}
+
+func (x *ListMsgReq) Reset() {
+	*x = ListMsgReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListMsgReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMsgReq) ProtoMessage() {}
+
+func (x *ListMsgReq) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMsgReq.ProtoReflect.Descriptor instead.
+func (*ListMsgReq) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListMsgReq) GetSendID() uint64 {
+	if x != nil {
+		return x.SendID
+	}
+	return 0
+}
+
+func (x *ListMsgReq) GetRecvID() []uint64 {
+	if x != nil {
+		return x.RecvID
+	}
+	return nil
+}
+
+func (x *ListMsgReq) GetMsgType() uint32 {
+	if x != nil {
+		return x.MsgType
+	}
+	return 0
+}
+
+func (x *ListMsgReq) GetSeqID() uint64 {
+	if x != nil {
+		return x.SeqID
+	}
+	return 0
+}
+
+func (x *ListMsgReq) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+type ListMsgResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Code    uint32 `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+}
+
+func (x *ListMsgResp) Reset() {
+	*x = ListMsgResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListMsgResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListMsgResp) ProtoMessage() {}
+
+func (x *ListMsgResp) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListMsgResp.ProtoReflect.Descriptor instead.
+func (*ListMsgResp) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ListMsgResp) GetCode() uint32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *ListMsgResp) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_msg_gateway_proto protoreflect.FileDescriptor
 
 var file_msg_gateway_proto_rawDesc = []byte{
 	0x0a, 0x11, 0x6d, 0x73, 0x67, 0x5f, 0x67, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x12, 0x0c, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61,
-	0x79, 0x22, 0x3f, 0x0a, 0x0b, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70,
-	0x12, 0x18, 0x0a, 0x07, 0x65, 0x72, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x05, 0x52, 0x07, 0x65, 0x72, 0x72, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x65, 0x72,
-	0x72, 0x4d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x65, 0x72, 0x72, 0x4d,
-	0x73, 0x67, 0x22, 0x3a, 0x0a, 0x0a, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71,
-	0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
-	0x74, 0x79, 0x70, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x58,
-	0x0a, 0x0c, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x12, 0x16,
-	0x0a, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06,
-	0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x63, 0x65, 0x49, 0x44,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x72, 0x65, 0x63, 0x65, 0x49, 0x44, 0x12, 0x18,
-	0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x41, 0x0a, 0x0d, 0x43, 0x6c, 0x69, 0x65,
-	0x6e, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x72, 0x72,
-	0x43, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x07, 0x65, 0x72, 0x72, 0x43,
-	0x6f, 0x64, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x65, 0x72, 0x72, 0x4d, 0x73, 0x67, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x06, 0x65, 0x72, 0x72, 0x4d, 0x73, 0x67, 0x22, 0x58, 0x0a, 0x0c, 0x53,
-	0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x73,
-	0x65, 0x6e, 0x64, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x73, 0x65, 0x6e,
-	0x64, 0x49, 0x44, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x63, 0x76, 0x49, 0x44, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x04, 0x52, 0x06, 0x72, 0x65, 0x63, 0x76, 0x49, 0x44, 0x12, 0x18, 0x0a, 0x07, 0x63,
-	0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f,
+	0x79, 0x22, 0x72, 0x0a, 0x0c, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x52, 0x65,
+	0x71, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x63,
+	0x76, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x72, 0x65, 0x63, 0x76, 0x49,
+	0x44, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x73, 0x67, 0x54, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x0d, 0x52, 0x07, 0x6d, 0x73, 0x67, 0x54, 0x79, 0x70, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63,
+	0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f,
 	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x3d, 0x0a, 0x0d, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d,
 	0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x0d, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65,
 	0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73,
-	0x73, 0x61, 0x67, 0x65, 0x32, 0xeb, 0x01, 0x0a, 0x0a, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65,
-	0x77, 0x61, 0x79, 0x12, 0x45, 0x0a, 0x0e, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x4d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x12, 0x18, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74,
-	0x65, 0x77, 0x61, 0x79, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x1a,
-	0x19, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x4d,
-	0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x49, 0x0a, 0x10, 0x52, 0x65,
-	0x63, 0x65, 0x69, 0x76, 0x65, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x73, 0x67, 0x12, 0x1a,
-	0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x43, 0x6c,
-	0x69, 0x65, 0x6e, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x1a, 0x19, 0x2e, 0x70, 0x62, 0x4d,
-	0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67,
-	0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x4b, 0x0a, 0x10, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65,
-	0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x12, 0x1a, 0x2e, 0x70, 0x62, 0x4d, 0x73,
+	0x73, 0x61, 0x67, 0x65, 0x22, 0x86, 0x01, 0x0a, 0x0a, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67,
+	0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x12, 0x16, 0x0a, 0x06, 0x72,
+	0x65, 0x63, 0x76, 0x49, 0x44, 0x18, 0x02, 0x20, 0x03, 0x28, 0x04, 0x52, 0x06, 0x72, 0x65, 0x63,
+	0x76, 0x49, 0x44, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x73, 0x67, 0x54, 0x79, 0x70, 0x65, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x6d, 0x73, 0x67, 0x54, 0x79, 0x70, 0x65, 0x12, 0x14, 0x0a,
+	0x05, 0x73, 0x65, 0x71, 0x49, 0x44, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x73, 0x65,
+	0x71, 0x49, 0x44, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x3b, 0x0a,
+	0x0b, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04,
+	0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65,
+	0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x32, 0xa0, 0x01, 0x0a, 0x0a, 0x4d,
+	0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x12, 0x4b, 0x0a, 0x10, 0x52, 0x65, 0x63,
+	0x65, 0x69, 0x76, 0x65, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x12, 0x1a, 0x2e,
+	0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x53, 0x69, 0x6e,
+	0x67, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x1a, 0x1b, 0x2e, 0x70, 0x62, 0x4d, 0x73,
 	0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d,
-	0x73, 0x67, 0x52, 0x65, 0x71, 0x1a, 0x1b, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74,
-	0x65, 0x77, 0x61, 0x79, 0x2e, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x52, 0x65,
-	0x73, 0x70, 0x42, 0x10, 0x5a, 0x0e, 0x2e, 0x3b, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74,
-	0x65, 0x77, 0x61, 0x79, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x45, 0x0a, 0x0e, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76,
+	0x65, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x12, 0x18, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67,
+	0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x52,
+	0x65, 0x71, 0x1a, 0x19, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61,
+	0x79, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x42, 0x10, 0x5a,
+	0x0e, 0x2e, 0x3b, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x62,
+	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -433,24 +339,20 @@ func file_msg_gateway_proto_rawDescGZIP() []byte {
 	return file_msg_gateway_proto_rawDescData
 }
 
-var file_msg_gateway_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_msg_gateway_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_msg_gateway_proto_goTypes = []interface{}{
-	(*MessageResp)(nil),   // 0: pbMsgGateway.MessageResp
-	(*MessageReq)(nil),    // 1: pbMsgGateway.MessageReq
-	(*ClientMsgReq)(nil),  // 2: pbMsgGateway.ClientMsgReq
-	(*ClientMsgResp)(nil), // 3: pbMsgGateway.ClientMsgResp
-	(*SingleMsgReq)(nil),  // 4: pbMsgGateway.SingleMsgReq
-	(*SingleMsgResp)(nil), // 5: pbMsgGateway.SingleMsgResp
+	(*SingleMsgReq)(nil),  // 0: pbMsgGateway.SingleMsgReq
+	(*SingleMsgResp)(nil), // 1: pbMsgGateway.SingleMsgResp
+	(*ListMsgReq)(nil),    // 2: pbMsgGateway.ListMsgReq
+	(*ListMsgResp)(nil),   // 3: pbMsgGateway.ListMsgResp
 }
 var file_msg_gateway_proto_depIdxs = []int32{
-	1, // 0: pbMsgGateway.MsgGateway.ReceiveMessage:input_type -> pbMsgGateway.MessageReq
-	2, // 1: pbMsgGateway.MsgGateway.ReceiveClientMsg:input_type -> pbMsgGateway.ClientMsgReq
-	4, // 2: pbMsgGateway.MsgGateway.ReceiveSingleMsg:input_type -> pbMsgGateway.SingleMsgReq
-	0, // 3: pbMsgGateway.MsgGateway.ReceiveMessage:output_type -> pbMsgGateway.MessageResp
-	0, // 4: pbMsgGateway.MsgGateway.ReceiveClientMsg:output_type -> pbMsgGateway.MessageResp
-	5, // 5: pbMsgGateway.MsgGateway.ReceiveSingleMsg:output_type -> pbMsgGateway.SingleMsgResp
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	0, // 0: pbMsgGateway.MsgGateway.ReceiveSingleMsg:input_type -> pbMsgGateway.SingleMsgReq
+	2, // 1: pbMsgGateway.MsgGateway.ReceiveListMsg:input_type -> pbMsgGateway.ListMsgReq
+	1, // 2: pbMsgGateway.MsgGateway.ReceiveSingleMsg:output_type -> pbMsgGateway.SingleMsgResp
+	3, // 3: pbMsgGateway.MsgGateway.ReceiveListMsg:output_type -> pbMsgGateway.ListMsgResp
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -463,54 +365,6 @@ func file_msg_gateway_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_msg_gateway_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MessageResp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_msg_gateway_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MessageReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_msg_gateway_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ClientMsgReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_msg_gateway_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ClientMsgResp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_msg_gateway_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SingleMsgReq); i {
 			case 0:
 				return &v.state
@@ -522,8 +376,32 @@ func file_msg_gateway_proto_init() {
 				return nil
 			}
 		}
-		file_msg_gateway_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_msg_gateway_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SingleMsgResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMsgReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMsgResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -541,7 +419,7 @@ func file_msg_gateway_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_msg_gateway_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -567,9 +445,8 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgGatewayClient interface {
-	ReceiveMessage(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageResp, error)
-	ReceiveClientMsg(ctx context.Context, in *ClientMsgReq, opts ...grpc.CallOption) (*MessageResp, error)
 	ReceiveSingleMsg(ctx context.Context, in *SingleMsgReq, opts ...grpc.CallOption) (*SingleMsgResp, error)
+	ReceiveListMsg(ctx context.Context, in *ListMsgReq, opts ...grpc.CallOption) (*ListMsgResp, error)
 }
 
 type msgGatewayClient struct {
@@ -578,24 +455,6 @@ type msgGatewayClient struct {
 
 func NewMsgGatewayClient(cc grpc.ClientConnInterface) MsgGatewayClient {
 	return &msgGatewayClient{cc}
-}
-
-func (c *msgGatewayClient) ReceiveMessage(ctx context.Context, in *MessageReq, opts ...grpc.CallOption) (*MessageResp, error) {
-	out := new(MessageResp)
-	err := c.cc.Invoke(ctx, "/pbMsgGateway.MsgGateway/ReceiveMessage", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgGatewayClient) ReceiveClientMsg(ctx context.Context, in *ClientMsgReq, opts ...grpc.CallOption) (*MessageResp, error) {
-	out := new(MessageResp)
-	err := c.cc.Invoke(ctx, "/pbMsgGateway.MsgGateway/ReceiveClientMsg", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *msgGatewayClient) ReceiveSingleMsg(ctx context.Context, in *SingleMsgReq, opts ...grpc.CallOption) (*SingleMsgResp, error) {
@@ -607,65 +466,34 @@ func (c *msgGatewayClient) ReceiveSingleMsg(ctx context.Context, in *SingleMsgRe
 	return out, nil
 }
 
+func (c *msgGatewayClient) ReceiveListMsg(ctx context.Context, in *ListMsgReq, opts ...grpc.CallOption) (*ListMsgResp, error) {
+	out := new(ListMsgResp)
+	err := c.cc.Invoke(ctx, "/pbMsgGateway.MsgGateway/ReceiveListMsg", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgGatewayServer is the server API for MsgGateway service.
 type MsgGatewayServer interface {
-	ReceiveMessage(context.Context, *MessageReq) (*MessageResp, error)
-	ReceiveClientMsg(context.Context, *ClientMsgReq) (*MessageResp, error)
 	ReceiveSingleMsg(context.Context, *SingleMsgReq) (*SingleMsgResp, error)
+	ReceiveListMsg(context.Context, *ListMsgReq) (*ListMsgResp, error)
 }
 
 // UnimplementedMsgGatewayServer can be embedded to have forward compatible implementations.
 type UnimplementedMsgGatewayServer struct {
 }
 
-func (*UnimplementedMsgGatewayServer) ReceiveMessage(context.Context, *MessageReq) (*MessageResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReceiveMessage not implemented")
-}
-func (*UnimplementedMsgGatewayServer) ReceiveClientMsg(context.Context, *ClientMsgReq) (*MessageResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReceiveClientMsg not implemented")
-}
 func (*UnimplementedMsgGatewayServer) ReceiveSingleMsg(context.Context, *SingleMsgReq) (*SingleMsgResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReceiveSingleMsg not implemented")
+}
+func (*UnimplementedMsgGatewayServer) ReceiveListMsg(context.Context, *ListMsgReq) (*ListMsgResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReceiveListMsg not implemented")
 }
 
 func RegisterMsgGatewayServer(s *grpc.Server, srv MsgGatewayServer) {
 	s.RegisterService(&_MsgGateway_serviceDesc, srv)
-}
-
-func _MsgGateway_ReceiveMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MessageReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgGatewayServer).ReceiveMessage(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pbMsgGateway.MsgGateway/ReceiveMessage",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgGatewayServer).ReceiveMessage(ctx, req.(*MessageReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _MsgGateway_ReceiveClientMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ClientMsgReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgGatewayServer).ReceiveClientMsg(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pbMsgGateway.MsgGateway/ReceiveClientMsg",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgGatewayServer).ReceiveClientMsg(ctx, req.(*ClientMsgReq))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _MsgGateway_ReceiveSingleMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -686,21 +514,35 @@ func _MsgGateway_ReceiveSingleMsg_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MsgGateway_ReceiveListMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMsgReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgGatewayServer).ReceiveListMsg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pbMsgGateway.MsgGateway/ReceiveListMsg",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgGatewayServer).ReceiveListMsg(ctx, req.(*ListMsgReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _MsgGateway_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "pbMsgGateway.MsgGateway",
 	HandlerType: (*MsgGatewayServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ReceiveMessage",
-			Handler:    _MsgGateway_ReceiveMessage_Handler,
-		},
-		{
-			MethodName: "ReceiveClientMsg",
-			Handler:    _MsgGateway_ReceiveClientMsg_Handler,
-		},
-		{
 			MethodName: "ReceiveSingleMsg",
 			Handler:    _MsgGateway_ReceiveSingleMsg_Handler,
+		},
+		{
+			MethodName: "ReceiveListMsg",
+			Handler:    _MsgGateway_ReceiveListMsg_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

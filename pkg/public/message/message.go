@@ -15,7 +15,10 @@ const (
 	Single_Common_Message_Request = 1 // client对client发送的单条消息
 	Single_Relay_Message_Request  = 2 // msg_relay从MQ中读取，转发给client
 	Group_Common_Message_Request  = 3 // 该条消息用于存储，不需要转发
-	Group_List_Message_Request   = 4 // 该条消息包含recv数组，需要进行转发消息
+	Group_List_Message_Request    = 4 // 该条消息包含recv数组，需要进行转发消息,自带seq
+	Control_Pull_List_Message     = 5 // 首次登录，刷新时候，同步与数据库中的消息
+	Control_Get_Max_Seq           = 6 // 获取seq，与本都seq对比
+	Control_Get_Status            = 7 // 获取client的在线状态
 )
 
 // =============================================WServer===============================================
@@ -38,30 +41,26 @@ type SingleRelayMsgReq struct {
 }
 
 type GroupCommMsgReq struct {
-	ReceID  uint64 `json:"recv_id" validate:"required"`
+	RecvID  uint64 `json:"recv_id" validate:"required"`
 	Content string `json:"content" validate:"required"`
 }
 
 type GroupListMsgReq struct {
-	ReceIDList []uint64 `json:"recv_id" validate:"required"`
+	RecvIDList []uint64 `json:"recv_id" validate:"required"`
+	SeqID      uint64   `json:"seq_id" validate:"required"`
 	Content    string   `json:"content" validate:"required"`
 }
 
 // websocket接收到的响应消息
 
-// =====================MQ=======================================
+// =================================================MQ========================================================
 // websocket存入MQ中的消息
 
-type MessageToMQ struct {
+type SingleMsgToMQ struct {
 	SendID     uint64 `json:"send_id"`
 	RecvID     uint64 `json:"recv_id"`
+	SeqID      uint64 `json:"seq_id"`
+	MsgType    uint32 `json:"msg_type"`
 	Content    string `json:"content"`
 	CreateTime int64  `json:"create_time"`
 }
-
-// type MQSendMessage struct {
-// 	SendID     int64  `json:"send_id"`
-// 	RecvID     int64  `json:"recv_id"`
-// 	Content    string `json:"content"`
-// 	CreateTime int64  `json:"create_time"`
-// }

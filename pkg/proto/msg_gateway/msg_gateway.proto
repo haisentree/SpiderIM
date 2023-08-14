@@ -3,30 +3,11 @@ package pbMsgGateway;
 option go_package = ".;pbMsgGateway";
 
 service MsgGateway {
-    rpc ReceiveMessage(MessageReq) returns(MessageResp);
-    rpc ReceiveClientMsg(ClientMsgReq) returns(MessageResp);
     rpc ReceiveSingleMsg(SingleMsgReq) returns(SingleMsgResp);
-}
-
-message MessageResp {
-    int32   errCode = 1;
-    string  errMsg = 2;
-}
-
-message MessageReq {
-    string type = 1;
-    string message = 2;
-}
-
-message ClientMsgReq {
-    int64 sendID = 1;
-    int64 receID = 2;
-    string content = 3;
-}
-
-message ClientMsgResp {
-    int32 errCode = 1;
-    string errMsg = 2;
+    rpc ReceiveListMsg(ListMsgReq) returns(ListMsgResp);
+    rpc ControlPullMsg(PullMsgReq) returns(PullMsgResp);
+    rpc ControlGetMaxSeq(GetMaxSeqReq) returns(GetMaxSeqResp);
+    rpc ControlGetStatus(GetStatusReq) returns(GetStatusResp);
 }
 
 message SingleMsgReq {
@@ -34,10 +15,47 @@ message SingleMsgReq {
     uint64 recvID = 2;
     uint32 msgType = 3;
     string content = 4;
-
 }
 
 message SingleMsgResp {
     uint32 code = 1;
     string message = 2;
+}
+
+message ListMsgReq {
+    uint64 sendID = 1;
+    repeated uint64 recvID= 2;
+    uint32 msgType = 3;
+    uint64 seqID = 4;
+    string content = 5;
+
+}
+
+message ListMsgResp {
+    uint32 code = 1;
+    string message = 2;
+}
+
+message PullMsgReq {
+
+}
+
+message PullMsgResp {
+
+}
+
+message GetMaxSeqReq {
+
+}
+
+message GetMaxSeqResp {
+
+}
+
+message GetStatusReq {
+
+}
+
+message GetStatusResp {
+
 }

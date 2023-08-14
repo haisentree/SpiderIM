@@ -21,6 +21,11 @@ type CreateClientReq struct {
 	ClientType int    `json:"client_type" binding:"required"`
 }
 
+type CreateClientToMessageReq struct {
+	ClientID uint64 `josn:"client_id" binding:"required"`
+	RecvID   uint64 `json:"recv_id" binding:"required"`
+}
+
 func CreateClient(c *gin.Context) {
 	params := CreateClientReq{}
 	if err := c.BindJSON(&params); err != nil {
@@ -28,9 +33,9 @@ func CreateClient(c *gin.Context) {
 		return
 	}
 
-	req := &pbBaseAPIClient.CreateMessageReq{
+	req := &pbBaseAPIClient.CreateClientReq{
 		SecretKey:  params.SecretKey,
-		ClientType: int32(params.ClientType),
+		ClientType: uint32(params.ClientType),
 	}
 
 	resp, err := BaseAPIClientSrvClient.CreateClient(context.Background(), req)
@@ -40,5 +45,39 @@ func CreateClient(c *gin.Context) {
 		return
 	}
 	// User存储clientID、clientUUID
-	c.JSON(200, gin.H{"errCode": 200, "errMsg": "success", "clientID": resp.ClientID, "clientUUID": resp.ClientUUID})
+	c.JSON(200, gin.H{"errCode": 200, "errMsg": "success", "clientID": resp.ClientID, "clientUUID": resp.ClientID})
+}
+
+func CreateClientToMessage(c *gin.Context) {
+	params := CreateClientToMessageReq{}
+	if err := c.BindJSON(&params); err != nil {
+		c.JSON(400, gin.H{"errCode": 400, "errMsg": "json data error"})
+		return
+	}
+
+	req := &pbBaseAPIClient.CreateClientToMessageReq{
+		ClientID: params.ClientID,
+		RecvID:   params.RecvID,
+	}
+
+	resp, err := BaseAPIClientSrvClient.CreateClientToMessage(context.Background(), req)
+	if err != nil {
+		log.Println("rpc error!")
+		c.JSON(200, gin.H{"errCode": 500, "errMsg": "rpc error"})
+		return
+	}
+	c.JSON(200, gin.H{"errCode": 200, "errMsg": "success", "client_to_message": resp.ClientToMsgID})
+}
+
+func CreateClientToMessaageResp(c *gin.Context) {
+
+	req := &pbBaseAPIClient.CreateCollectToMessageReq{Create: true}
+
+	resp, err := BaseAPIClientSrvClient.CreateCollectToMessage(context.Background(), req)
+	if err != nil {
+		log.Println("rpc error!")
+		c.JSON(200, gin.H{"errCode": 500, "errMsg": "rpc error"})
+		return
+	}
+	c.JSON(200, gin.H{"errCode": 200, "errMsg": "success", "collect_to_message": resp.CollectToMsgID})
 }
