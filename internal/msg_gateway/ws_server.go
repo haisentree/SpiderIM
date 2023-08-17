@@ -32,7 +32,7 @@ type WSClient struct {
 func (ws *WServer) OnInit(wsPort int) {
 	ws.wsAddr = ":" + utils.IntToString(wsPort)
 	ws.wsMaxConnNum = 20
-	ws.wsClientToConn = make(map[uint64]map[int32]*WSClient)
+	ws.wsClientToConn = make(map[uint64]map[uint8]*WSClient)
 	ws.wsUpGrader = &websocket.Upgrader{
 		HandshakeTimeout: 5 * time.Second,
 		ReadBufferSize:   1024,

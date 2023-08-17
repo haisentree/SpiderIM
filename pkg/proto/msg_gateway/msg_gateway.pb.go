@@ -24,6 +24,337 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type CommonClientToSeq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClientID uint64 `protobuf:"varint,1,opt,name=clientID,proto3" json:"clientID,omitempty"`
+	SeqID    uint64 `protobuf:"varint,2,opt,name=seqID,proto3" json:"seqID,omitempty"`
+}
+
+func (x *CommonClientToSeq) Reset() {
+	*x = CommonClientToSeq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CommonClientToSeq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CommonClientToSeq) ProtoMessage() {}
+
+func (x *CommonClientToSeq) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CommonClientToSeq.ProtoReflect.Descriptor instead.
+func (*CommonClientToSeq) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *CommonClientToSeq) GetClientID() uint64 {
+	if x != nil {
+		return x.ClientID
+	}
+	return 0
+}
+
+func (x *CommonClientToSeq) GetSeqID() uint64 {
+	if x != nil {
+		return x.SeqID
+	}
+	return 0
+}
+
+type CommonCollectToSeq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CollectID uint64 `protobuf:"varint,1,opt,name=collectID,proto3" json:"collectID,omitempty"`
+	SeqID     uint64 `protobuf:"varint,2,opt,name=seqID,proto3" json:"seqID,omitempty"`
+}
+
+func (x *CommonCollectToSeq) Reset() {
+	*x = CommonCollectToSeq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CommonCollectToSeq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CommonCollectToSeq) ProtoMessage() {}
+
+func (x *CommonCollectToSeq) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CommonCollectToSeq.ProtoReflect.Descriptor instead.
+func (*CommonCollectToSeq) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CommonCollectToSeq) GetCollectID() uint64 {
+	if x != nil {
+		return x.CollectID
+	}
+	return 0
+}
+
+func (x *CommonCollectToSeq) GetSeqID() uint64 {
+	if x != nil {
+		return x.SeqID
+	}
+	return 0
+}
+
+type CommonClientToStatus struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClientID uint64 `protobuf:"varint,1,opt,name=clientID,proto3" json:"clientID,omitempty"`
+	IsOnline bool   `protobuf:"varint,2,opt,name=isOnline,proto3" json:"isOnline,omitempty"`
+}
+
+func (x *CommonClientToStatus) Reset() {
+	*x = CommonClientToStatus{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CommonClientToStatus) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CommonClientToStatus) ProtoMessage() {}
+
+func (x *CommonClientToStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CommonClientToStatus.ProtoReflect.Descriptor instead.
+func (*CommonClientToStatus) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *CommonClientToStatus) GetClientID() uint64 {
+	if x != nil {
+		return x.ClientID
+	}
+	return 0
+}
+
+func (x *CommonClientToStatus) GetIsOnline() bool {
+	if x != nil {
+		return x.IsOnline
+	}
+	return false
+}
+
+type CommonClientToMsg struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SeqID      uint64 `protobuf:"varint,1,opt,name=seqID,proto3" json:"seqID,omitempty"`
+	OwnerID    uint64 `protobuf:"varint,2,opt,name=ownerID,proto3" json:"ownerID,omitempty"`
+	ClientID   uint64 `protobuf:"varint,3,opt,name=clientID,proto3" json:"clientID,omitempty"`
+	IsSneder   bool   `protobuf:"varint,4,opt,name=isSneder,proto3" json:"isSneder,omitempty"`
+	CreateTime int64  `protobuf:"varint,5,opt,name=createTime,proto3" json:"createTime,omitempty"`
+	Content    string `protobuf:"bytes,6,opt,name=content,proto3" json:"content,omitempty"`
+}
+
+func (x *CommonClientToMsg) Reset() {
+	*x = CommonClientToMsg{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CommonClientToMsg) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CommonClientToMsg) ProtoMessage() {}
+
+func (x *CommonClientToMsg) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CommonClientToMsg.ProtoReflect.Descriptor instead.
+func (*CommonClientToMsg) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *CommonClientToMsg) GetSeqID() uint64 {
+	if x != nil {
+		return x.SeqID
+	}
+	return 0
+}
+
+func (x *CommonClientToMsg) GetOwnerID() uint64 {
+	if x != nil {
+		return x.OwnerID
+	}
+	return 0
+}
+
+func (x *CommonClientToMsg) GetClientID() uint64 {
+	if x != nil {
+		return x.ClientID
+	}
+	return 0
+}
+
+func (x *CommonClientToMsg) GetIsSneder() bool {
+	if x != nil {
+		return x.IsSneder
+	}
+	return false
+}
+
+func (x *CommonClientToMsg) GetCreateTime() int64 {
+	if x != nil {
+		return x.CreateTime
+	}
+	return 0
+}
+
+func (x *CommonClientToMsg) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
+type CommonCollectToMsg struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SeqID      uint64 `protobuf:"varint,1,opt,name=seqID,proto3" json:"seqID,omitempty"`
+	CollectID  uint64 `protobuf:"varint,2,opt,name=collectID,proto3" json:"collectID,omitempty"`
+	SendID     uint64 `protobuf:"varint,3,opt,name=sendID,proto3" json:"sendID,omitempty"`
+	CreateTime int64  `protobuf:"varint,4,opt,name=createTime,proto3" json:"createTime,omitempty"`
+	Content    string `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
+}
+
+func (x *CommonCollectToMsg) Reset() {
+	*x = CommonCollectToMsg{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CommonCollectToMsg) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CommonCollectToMsg) ProtoMessage() {}
+
+func (x *CommonCollectToMsg) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CommonCollectToMsg.ProtoReflect.Descriptor instead.
+func (*CommonCollectToMsg) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *CommonCollectToMsg) GetSeqID() uint64 {
+	if x != nil {
+		return x.SeqID
+	}
+	return 0
+}
+
+func (x *CommonCollectToMsg) GetCollectID() uint64 {
+	if x != nil {
+		return x.CollectID
+	}
+	return 0
+}
+
+func (x *CommonCollectToMsg) GetSendID() uint64 {
+	if x != nil {
+		return x.SendID
+	}
+	return 0
+}
+
+func (x *CommonCollectToMsg) GetCreateTime() int64 {
+	if x != nil {
+		return x.CreateTime
+	}
+	return 0
+}
+
+func (x *CommonCollectToMsg) GetContent() string {
+	if x != nil {
+		return x.Content
+	}
+	return ""
+}
+
 type SingleMsgReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -38,7 +369,7 @@ type SingleMsgReq struct {
 func (x *SingleMsgReq) Reset() {
 	*x = SingleMsgReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_msg_gateway_proto_msgTypes[0]
+		mi := &file_msg_gateway_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -51,7 +382,7 @@ func (x *SingleMsgReq) String() string {
 func (*SingleMsgReq) ProtoMessage() {}
 
 func (x *SingleMsgReq) ProtoReflect() protoreflect.Message {
-	mi := &file_msg_gateway_proto_msgTypes[0]
+	mi := &file_msg_gateway_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64,7 +395,7 @@ func (x *SingleMsgReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SingleMsgReq.ProtoReflect.Descriptor instead.
 func (*SingleMsgReq) Descriptor() ([]byte, []int) {
-	return file_msg_gateway_proto_rawDescGZIP(), []int{0}
+	return file_msg_gateway_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *SingleMsgReq) GetSendID() uint64 {
@@ -107,7 +438,7 @@ type SingleMsgResp struct {
 func (x *SingleMsgResp) Reset() {
 	*x = SingleMsgResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_msg_gateway_proto_msgTypes[1]
+		mi := &file_msg_gateway_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -120,7 +451,7 @@ func (x *SingleMsgResp) String() string {
 func (*SingleMsgResp) ProtoMessage() {}
 
 func (x *SingleMsgResp) ProtoReflect() protoreflect.Message {
-	mi := &file_msg_gateway_proto_msgTypes[1]
+	mi := &file_msg_gateway_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -133,7 +464,7 @@ func (x *SingleMsgResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SingleMsgResp.ProtoReflect.Descriptor instead.
 func (*SingleMsgResp) Descriptor() ([]byte, []int) {
-	return file_msg_gateway_proto_rawDescGZIP(), []int{1}
+	return file_msg_gateway_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *SingleMsgResp) GetCode() uint32 {
@@ -165,7 +496,7 @@ type ListMsgReq struct {
 func (x *ListMsgReq) Reset() {
 	*x = ListMsgReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_msg_gateway_proto_msgTypes[2]
+		mi := &file_msg_gateway_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -178,7 +509,7 @@ func (x *ListMsgReq) String() string {
 func (*ListMsgReq) ProtoMessage() {}
 
 func (x *ListMsgReq) ProtoReflect() protoreflect.Message {
-	mi := &file_msg_gateway_proto_msgTypes[2]
+	mi := &file_msg_gateway_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -191,7 +522,7 @@ func (x *ListMsgReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMsgReq.ProtoReflect.Descriptor instead.
 func (*ListMsgReq) Descriptor() ([]byte, []int) {
-	return file_msg_gateway_proto_rawDescGZIP(), []int{2}
+	return file_msg_gateway_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ListMsgReq) GetSendID() uint64 {
@@ -241,7 +572,7 @@ type ListMsgResp struct {
 func (x *ListMsgResp) Reset() {
 	*x = ListMsgResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_msg_gateway_proto_msgTypes[3]
+		mi := &file_msg_gateway_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -254,7 +585,7 @@ func (x *ListMsgResp) String() string {
 func (*ListMsgResp) ProtoMessage() {}
 
 func (x *ListMsgResp) ProtoReflect() protoreflect.Message {
-	mi := &file_msg_gateway_proto_msgTypes[3]
+	mi := &file_msg_gateway_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -267,7 +598,7 @@ func (x *ListMsgResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListMsgResp.ProtoReflect.Descriptor instead.
 func (*ListMsgResp) Descriptor() ([]byte, []int) {
-	return file_msg_gateway_proto_rawDescGZIP(), []int{3}
+	return file_msg_gateway_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ListMsgResp) GetCode() uint32 {
@@ -284,47 +615,668 @@ func (x *ListMsgResp) GetMessage() string {
 	return ""
 }
 
+type PullClientMsgReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OwnerID     uint64               `protobuf:"varint,1,opt,name=ownerID,proto3" json:"ownerID,omitempty"`
+	ClientToSeq []*CommonClientToSeq `protobuf:"bytes,2,rep,name=clientToSeq,proto3" json:"clientToSeq,omitempty"`
+}
+
+func (x *PullClientMsgReq) Reset() {
+	*x = PullClientMsgReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PullClientMsgReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PullClientMsgReq) ProtoMessage() {}
+
+func (x *PullClientMsgReq) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PullClientMsgReq.ProtoReflect.Descriptor instead.
+func (*PullClientMsgReq) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *PullClientMsgReq) GetOwnerID() uint64 {
+	if x != nil {
+		return x.OwnerID
+	}
+	return 0
+}
+
+func (x *PullClientMsgReq) GetClientToSeq() []*CommonClientToSeq {
+	if x != nil {
+		return x.ClientToSeq
+	}
+	return nil
+}
+
+type PullClientMsgResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Code        uint32               `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	ClientToMsg []*CommonClientToMsg `protobuf:"bytes,2,rep,name=clientToMsg,proto3" json:"clientToMsg,omitempty"`
+}
+
+func (x *PullClientMsgResp) Reset() {
+	*x = PullClientMsgResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PullClientMsgResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PullClientMsgResp) ProtoMessage() {}
+
+func (x *PullClientMsgResp) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PullClientMsgResp.ProtoReflect.Descriptor instead.
+func (*PullClientMsgResp) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *PullClientMsgResp) GetCode() uint32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *PullClientMsgResp) GetClientToMsg() []*CommonClientToMsg {
+	if x != nil {
+		return x.ClientToMsg
+	}
+	return nil
+}
+
+type PullCollectMsgReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CollectToSeq []*CommonCollectToSeq `protobuf:"bytes,1,rep,name=collectToSeq,proto3" json:"collectToSeq,omitempty"`
+}
+
+func (x *PullCollectMsgReq) Reset() {
+	*x = PullCollectMsgReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PullCollectMsgReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PullCollectMsgReq) ProtoMessage() {}
+
+func (x *PullCollectMsgReq) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PullCollectMsgReq.ProtoReflect.Descriptor instead.
+func (*PullCollectMsgReq) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *PullCollectMsgReq) GetCollectToSeq() []*CommonCollectToSeq {
+	if x != nil {
+		return x.CollectToSeq
+	}
+	return nil
+}
+
+type PullCollectMsgResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Code         uint32                `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	CollectToMsg []*CommonCollectToMsg `protobuf:"bytes,2,rep,name=collectToMsg,proto3" json:"collectToMsg,omitempty"`
+}
+
+func (x *PullCollectMsgResp) Reset() {
+	*x = PullCollectMsgResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PullCollectMsgResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PullCollectMsgResp) ProtoMessage() {}
+
+func (x *PullCollectMsgResp) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PullCollectMsgResp.ProtoReflect.Descriptor instead.
+func (*PullCollectMsgResp) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *PullCollectMsgResp) GetCode() uint32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *PullCollectMsgResp) GetCollectToMsg() []*CommonCollectToMsg {
+	if x != nil {
+		return x.CollectToMsg
+	}
+	return nil
+}
+
+type GetClientMaxSeqReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OwnerID    uint64   `protobuf:"varint,1,opt,name=ownerID,proto3" json:"ownerID,omitempty"`
+	ClientList []uint64 `protobuf:"varint,2,rep,packed,name=clientList,proto3" json:"clientList,omitempty"`
+}
+
+func (x *GetClientMaxSeqReq) Reset() {
+	*x = GetClientMaxSeqReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetClientMaxSeqReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetClientMaxSeqReq) ProtoMessage() {}
+
+func (x *GetClientMaxSeqReq) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetClientMaxSeqReq.ProtoReflect.Descriptor instead.
+func (*GetClientMaxSeqReq) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetClientMaxSeqReq) GetOwnerID() uint64 {
+	if x != nil {
+		return x.OwnerID
+	}
+	return 0
+}
+
+func (x *GetClientMaxSeqReq) GetClientList() []uint64 {
+	if x != nil {
+		return x.ClientList
+	}
+	return nil
+}
+
+type GetClientMaxSeqResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClientToSeq []*CommonClientToSeq `protobuf:"bytes,1,rep,name=clientToSeq,proto3" json:"clientToSeq,omitempty"`
+}
+
+func (x *GetClientMaxSeqResp) Reset() {
+	*x = GetClientMaxSeqResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetClientMaxSeqResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetClientMaxSeqResp) ProtoMessage() {}
+
+func (x *GetClientMaxSeqResp) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetClientMaxSeqResp.ProtoReflect.Descriptor instead.
+func (*GetClientMaxSeqResp) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetClientMaxSeqResp) GetClientToSeq() []*CommonClientToSeq {
+	if x != nil {
+		return x.ClientToSeq
+	}
+	return nil
+}
+
+type GetCollectMaxSeqReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CollectList []uint64 `protobuf:"varint,1,rep,packed,name=collectList,proto3" json:"collectList,omitempty"`
+}
+
+func (x *GetCollectMaxSeqReq) Reset() {
+	*x = GetCollectMaxSeqReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetCollectMaxSeqReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCollectMaxSeqReq) ProtoMessage() {}
+
+func (x *GetCollectMaxSeqReq) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCollectMaxSeqReq.ProtoReflect.Descriptor instead.
+func (*GetCollectMaxSeqReq) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetCollectMaxSeqReq) GetCollectList() []uint64 {
+	if x != nil {
+		return x.CollectList
+	}
+	return nil
+}
+
+type GetCollectMaxSeqResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CollectToSeq []*CommonCollectToSeq `protobuf:"bytes,1,rep,name=collectToSeq,proto3" json:"collectToSeq,omitempty"`
+}
+
+func (x *GetCollectMaxSeqResp) Reset() {
+	*x = GetCollectMaxSeqResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[16]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetCollectMaxSeqResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCollectMaxSeqResp) ProtoMessage() {}
+
+func (x *GetCollectMaxSeqResp) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[16]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCollectMaxSeqResp.ProtoReflect.Descriptor instead.
+func (*GetCollectMaxSeqResp) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *GetCollectMaxSeqResp) GetCollectToSeq() []*CommonCollectToSeq {
+	if x != nil {
+		return x.CollectToSeq
+	}
+	return nil
+}
+
+type GetStatusReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ClientIDList []uint64 `protobuf:"varint,1,rep,packed,name=clientIDList,proto3" json:"clientIDList,omitempty"`
+}
+
+func (x *GetStatusReq) Reset() {
+	*x = GetStatusReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[17]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetStatusReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetStatusReq) ProtoMessage() {}
+
+func (x *GetStatusReq) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[17]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetStatusReq.ProtoReflect.Descriptor instead.
+func (*GetStatusReq) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *GetStatusReq) GetClientIDList() []uint64 {
+	if x != nil {
+		return x.ClientIDList
+	}
+	return nil
+}
+
+type GetStatusResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	StatusList []*CommonClientToStatus `protobuf:"bytes,1,rep,name=statusList,proto3" json:"statusList,omitempty"`
+}
+
+func (x *GetStatusResp) Reset() {
+	*x = GetStatusResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_msg_gateway_proto_msgTypes[18]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetStatusResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetStatusResp) ProtoMessage() {}
+
+func (x *GetStatusResp) ProtoReflect() protoreflect.Message {
+	mi := &file_msg_gateway_proto_msgTypes[18]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetStatusResp.ProtoReflect.Descriptor instead.
+func (*GetStatusResp) Descriptor() ([]byte, []int) {
+	return file_msg_gateway_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *GetStatusResp) GetStatusList() []*CommonClientToStatus {
+	if x != nil {
+		return x.StatusList
+	}
+	return nil
+}
+
 var File_msg_gateway_proto protoreflect.FileDescriptor
 
 var file_msg_gateway_proto_rawDesc = []byte{
 	0x0a, 0x11, 0x6d, 0x73, 0x67, 0x5f, 0x67, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x70, 0x72,
 	0x6f, 0x74, 0x6f, 0x12, 0x0c, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61,
-	0x79, 0x22, 0x72, 0x0a, 0x0c, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x52, 0x65,
-	0x71, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x04, 0x52, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x63,
-	0x76, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x72, 0x65, 0x63, 0x76, 0x49,
-	0x44, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x73, 0x67, 0x54, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x0d, 0x52, 0x07, 0x6d, 0x73, 0x67, 0x54, 0x79, 0x70, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63,
-	0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f,
-	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x3d, 0x0a, 0x0d, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d,
-	0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0d, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65,
-	0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73,
-	0x73, 0x61, 0x67, 0x65, 0x22, 0x86, 0x01, 0x0a, 0x0a, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67,
-	0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x04, 0x52, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x12, 0x16, 0x0a, 0x06, 0x72,
-	0x65, 0x63, 0x76, 0x49, 0x44, 0x18, 0x02, 0x20, 0x03, 0x28, 0x04, 0x52, 0x06, 0x72, 0x65, 0x63,
-	0x76, 0x49, 0x44, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x73, 0x67, 0x54, 0x79, 0x70, 0x65, 0x18, 0x03,
-	0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x6d, 0x73, 0x67, 0x54, 0x79, 0x70, 0x65, 0x12, 0x14, 0x0a,
-	0x05, 0x73, 0x65, 0x71, 0x49, 0x44, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x73, 0x65,
-	0x71, 0x49, 0x44, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x05,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x3b, 0x0a,
-	0x0b, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04,
+	0x79, 0x22, 0x45, 0x0a, 0x11, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x43, 0x6c, 0x69, 0x65, 0x6e,
+	0x74, 0x54, 0x6f, 0x53, 0x65, 0x71, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x49, 0x44, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x65, 0x71, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x05, 0x73, 0x65, 0x71, 0x49, 0x44, 0x22, 0x48, 0x0a, 0x12, 0x43, 0x6f, 0x6d, 0x6d,
+	0x6f, 0x6e, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x53, 0x65, 0x71, 0x12, 0x1c,
+	0x0a, 0x09, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x04, 0x52, 0x09, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x49, 0x44, 0x12, 0x14, 0x0a, 0x05,
+	0x73, 0x65, 0x71, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x73, 0x65, 0x71,
+	0x49, 0x44, 0x22, 0x4e, 0x0a, 0x14, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x43, 0x6c, 0x69, 0x65,
+	0x6e, 0x74, 0x54, 0x6f, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x6c,
+	0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x63, 0x6c,
+	0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x12, 0x1a, 0x0a, 0x08, 0x69, 0x73, 0x4f, 0x6e, 0x6c, 0x69,
+	0x6e, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x69, 0x73, 0x4f, 0x6e, 0x6c, 0x69,
+	0x6e, 0x65, 0x22, 0xb5, 0x01, 0x0a, 0x11, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x43, 0x6c, 0x69,
+	0x65, 0x6e, 0x74, 0x54, 0x6f, 0x4d, 0x73, 0x67, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x65, 0x71, 0x49,
+	0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x73, 0x65, 0x71, 0x49, 0x44, 0x12, 0x18,
+	0x0a, 0x07, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x07, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x49, 0x44, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x6c, 0x69, 0x65,
+	0x6e, 0x74, 0x49, 0x44, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x63, 0x6c, 0x69, 0x65,
+	0x6e, 0x74, 0x49, 0x44, 0x12, 0x1a, 0x0a, 0x08, 0x69, 0x73, 0x53, 0x6e, 0x65, 0x64, 0x65, 0x72,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x69, 0x73, 0x53, 0x6e, 0x65, 0x64, 0x65, 0x72,
+	0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x05,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65,
+	0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x9a, 0x01, 0x0a, 0x12, 0x43,
+	0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x4d, 0x73,
+	0x67, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x65, 0x71, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x05, 0x73, 0x65, 0x71, 0x49, 0x44, 0x12, 0x1c, 0x0a, 0x09, 0x63, 0x6f, 0x6c, 0x6c, 0x65,
+	0x63, 0x74, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x63, 0x6f, 0x6c, 0x6c,
+	0x65, 0x63, 0x74, 0x49, 0x44, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x12, 0x1e, 0x0a,
+	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x18, 0x0a,
+	0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07,
+	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x72, 0x0a, 0x0c, 0x53, 0x69, 0x6e, 0x67, 0x6c,
+	0x65, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49,
+	0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49, 0x44, 0x12,
+	0x16, 0x0a, 0x06, 0x72, 0x65, 0x63, 0x76, 0x49, 0x44, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x06, 0x72, 0x65, 0x63, 0x76, 0x49, 0x44, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x73, 0x67, 0x54, 0x79,
+	0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x6d, 0x73, 0x67, 0x54, 0x79, 0x70,
+	0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x22, 0x3d, 0x0a, 0x0d, 0x53,
+	0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04,
 	0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65,
 	0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x32, 0xa0, 0x01, 0x0a, 0x0a, 0x4d,
-	0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x12, 0x4b, 0x0a, 0x10, 0x52, 0x65, 0x63,
-	0x65, 0x69, 0x76, 0x65, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x12, 0x1a, 0x2e,
-	0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x53, 0x69, 0x6e,
-	0x67, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x1a, 0x1b, 0x2e, 0x70, 0x62, 0x4d, 0x73,
-	0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d,
-	0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x45, 0x0a, 0x0e, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76,
-	0x65, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x12, 0x18, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67,
-	0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x52,
-	0x65, 0x71, 0x1a, 0x19, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61,
-	0x79, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x42, 0x10, 0x5a,
-	0x0e, 0x2e, 0x3b, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x86, 0x01, 0x0a, 0x0a, 0x4c,
+	0x69, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65, 0x6e,
+	0x64, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x06, 0x73, 0x65, 0x6e, 0x64, 0x49,
+	0x44, 0x12, 0x16, 0x0a, 0x06, 0x72, 0x65, 0x63, 0x76, 0x49, 0x44, 0x18, 0x02, 0x20, 0x03, 0x28,
+	0x04, 0x52, 0x06, 0x72, 0x65, 0x63, 0x76, 0x49, 0x44, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x73, 0x67,
+	0x54, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x07, 0x6d, 0x73, 0x67, 0x54,
+	0x79, 0x70, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x65, 0x71, 0x49, 0x44, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x05, 0x73, 0x65, 0x71, 0x49, 0x44, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74,
+	0x65, 0x6e, 0x74, 0x22, 0x3b, 0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65,
+	0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d,
+	0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67,
+	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65,
+	0x22, 0x6f, 0x0a, 0x10, 0x50, 0x75, 0x6c, 0x6c, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x73,
+	0x67, 0x52, 0x65, 0x71, 0x12, 0x18, 0x0a, 0x07, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x49, 0x44, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x49, 0x44, 0x12, 0x41,
+	0x0a, 0x0b, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f, 0x53, 0x65, 0x71, 0x18, 0x02, 0x20,
+	0x03, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77,
+	0x61, 0x79, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54,
+	0x6f, 0x53, 0x65, 0x71, 0x52, 0x0b, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f, 0x53, 0x65,
+	0x71, 0x22, 0x6a, 0x0a, 0x11, 0x50, 0x75, 0x6c, 0x6c, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d,
+	0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0d, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x41, 0x0a, 0x0b, 0x63, 0x6c,
+	0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f, 0x4d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x1f, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x43,
+	0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f, 0x4d, 0x73, 0x67,
+	0x52, 0x0b, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f, 0x4d, 0x73, 0x67, 0x22, 0x59, 0x0a,
+	0x11, 0x50, 0x75, 0x6c, 0x6c, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x4d, 0x73, 0x67, 0x52,
+	0x65, 0x71, 0x12, 0x44, 0x0a, 0x0c, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x53,
+	0x65, 0x71, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67,
+	0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x43, 0x6f,
+	0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x53, 0x65, 0x71, 0x52, 0x0c, 0x63, 0x6f, 0x6c, 0x6c,
+	0x65, 0x63, 0x74, 0x54, 0x6f, 0x53, 0x65, 0x71, 0x22, 0x6e, 0x0a, 0x12, 0x50, 0x75, 0x6c, 0x6c,
+	0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12,
+	0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x04, 0x63, 0x6f,
+	0x64, 0x65, 0x12, 0x44, 0x0a, 0x0c, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x4d,
+	0x73, 0x67, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67,
+	0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x43, 0x6f,
+	0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x4d, 0x73, 0x67, 0x52, 0x0c, 0x63, 0x6f, 0x6c, 0x6c,
+	0x65, 0x63, 0x74, 0x54, 0x6f, 0x4d, 0x73, 0x67, 0x22, 0x4e, 0x0a, 0x12, 0x47, 0x65, 0x74, 0x43,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x61, 0x78, 0x53, 0x65, 0x71, 0x52, 0x65, 0x71, 0x12, 0x18,
+	0x0a, 0x07, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x07, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x49, 0x44, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x6c, 0x69, 0x65,
+	0x6e, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x02, 0x20, 0x03, 0x28, 0x04, 0x52, 0x0a, 0x63, 0x6c,
+	0x69, 0x65, 0x6e, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x22, 0x58, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x43,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x61, 0x78, 0x53, 0x65, 0x71, 0x52, 0x65, 0x73, 0x70, 0x12,
+	0x41, 0x0a, 0x0b, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f, 0x53, 0x65, 0x71, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65,
+	0x77, 0x61, 0x79, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74,
+	0x54, 0x6f, 0x53, 0x65, 0x71, 0x52, 0x0b, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f, 0x53,
+	0x65, 0x71, 0x22, 0x37, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74,
+	0x4d, 0x61, 0x78, 0x53, 0x65, 0x71, 0x52, 0x65, 0x71, 0x12, 0x20, 0x0a, 0x0b, 0x63, 0x6f, 0x6c,
+	0x6c, 0x65, 0x63, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x04, 0x52, 0x0b,
+	0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x4c, 0x69, 0x73, 0x74, 0x22, 0x5c, 0x0a, 0x14, 0x47,
+	0x65, 0x74, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x4d, 0x61, 0x78, 0x53, 0x65, 0x71, 0x52,
+	0x65, 0x73, 0x70, 0x12, 0x44, 0x0a, 0x0c, 0x63, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f,
+	0x53, 0x65, 0x71, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x70, 0x62, 0x4d, 0x73,
+	0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x43,
+	0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x53, 0x65, 0x71, 0x52, 0x0c, 0x63, 0x6f, 0x6c,
+	0x6c, 0x65, 0x63, 0x74, 0x54, 0x6f, 0x53, 0x65, 0x71, 0x22, 0x32, 0x0a, 0x0c, 0x47, 0x65, 0x74,
+	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x12, 0x22, 0x0a, 0x0c, 0x63, 0x6c, 0x69,
+	0x65, 0x6e, 0x74, 0x49, 0x44, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03, 0x28, 0x04, 0x52,
+	0x0c, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x49, 0x44, 0x4c, 0x69, 0x73, 0x74, 0x22, 0x53, 0x0a,
+	0x0d, 0x47, 0x65, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x12, 0x42,
+	0x0a, 0x0a, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x4c, 0x69, 0x73, 0x74, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x22, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61,
+	0x79, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x54, 0x6f,
+	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x0a, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x4c, 0x69,
+	0x73, 0x74, 0x32, 0xe3, 0x04, 0x0a, 0x0a, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61,
+	0x79, 0x12, 0x4b, 0x0a, 0x10, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x53, 0x69, 0x6e, 0x67,
+	0x6c, 0x65, 0x4d, 0x73, 0x67, 0x12, 0x1a, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74,
+	0x65, 0x77, 0x61, 0x79, 0x2e, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x52, 0x65,
+	0x71, 0x1a, 0x1b, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79,
+	0x2e, 0x53, 0x69, 0x6e, 0x67, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x45,
+	0x0a, 0x0e, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67,
+	0x12, 0x18, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e,
+	0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x1a, 0x19, 0x2e, 0x70, 0x62, 0x4d,
+	0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x4d, 0x73,
+	0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x57, 0x0a, 0x14, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c,
+	0x50, 0x75, 0x6c, 0x6c, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x73, 0x67, 0x12, 0x1e, 0x2e,
+	0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x50, 0x75, 0x6c,
+	0x6c, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x1a, 0x1f, 0x2e,
+	0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x50, 0x75, 0x6c,
+	0x6c, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x5a,
+	0x0a, 0x15, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x50, 0x75, 0x6c, 0x6c, 0x43, 0x6f, 0x6c,
+	0x6c, 0x65, 0x63, 0x74, 0x4d, 0x73, 0x67, 0x12, 0x1f, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47,
+	0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x50, 0x75, 0x6c, 0x6c, 0x43, 0x6f, 0x6c, 0x6c, 0x65,
+	0x63, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x71, 0x1a, 0x20, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67,
+	0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x50, 0x75, 0x6c, 0x6c, 0x43, 0x6f, 0x6c, 0x6c,
+	0x65, 0x63, 0x74, 0x4d, 0x73, 0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x5d, 0x0a, 0x16, 0x43, 0x6f,
+	0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x47, 0x65, 0x74, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x61,
+	0x78, 0x53, 0x65, 0x71, 0x12, 0x20, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65,
+	0x77, 0x61, 0x79, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d, 0x61, 0x78,
+	0x53, 0x65, 0x71, 0x52, 0x65, 0x71, 0x1a, 0x21, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61,
+	0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4d,
+	0x61, 0x78, 0x53, 0x65, 0x71, 0x52, 0x65, 0x73, 0x70, 0x12, 0x60, 0x0a, 0x17, 0x43, 0x6f, 0x6e,
+	0x74, 0x72, 0x6f, 0x6c, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x4d, 0x61,
+	0x78, 0x53, 0x65, 0x71, 0x12, 0x21, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65,
+	0x77, 0x61, 0x79, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63, 0x74, 0x4d, 0x61,
+	0x78, 0x53, 0x65, 0x71, 0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47,
+	0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x6f, 0x6c, 0x6c, 0x65, 0x63,
+	0x74, 0x4d, 0x61, 0x78, 0x53, 0x65, 0x71, 0x52, 0x65, 0x73, 0x70, 0x12, 0x4b, 0x0a, 0x10, 0x43,
+	0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x47, 0x65, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12,
+	0x1a, 0x2e, 0x70, 0x62, 0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x47,
+	0x65, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x1a, 0x1b, 0x2e, 0x70, 0x62,
+	0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x42, 0x10, 0x5a, 0x0e, 0x2e, 0x3b, 0x70, 0x62,
+	0x4d, 0x73, 0x67, 0x47, 0x61, 0x74, 0x65, 0x77, 0x61, 0x79, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -339,23 +1291,55 @@ func file_msg_gateway_proto_rawDescGZIP() []byte {
 	return file_msg_gateway_proto_rawDescData
 }
 
-var file_msg_gateway_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_msg_gateway_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_msg_gateway_proto_goTypes = []interface{}{
-	(*SingleMsgReq)(nil),  // 0: pbMsgGateway.SingleMsgReq
-	(*SingleMsgResp)(nil), // 1: pbMsgGateway.SingleMsgResp
-	(*ListMsgReq)(nil),    // 2: pbMsgGateway.ListMsgReq
-	(*ListMsgResp)(nil),   // 3: pbMsgGateway.ListMsgResp
+	(*CommonClientToSeq)(nil),    // 0: pbMsgGateway.CommonClientToSeq
+	(*CommonCollectToSeq)(nil),   // 1: pbMsgGateway.CommonCollectToSeq
+	(*CommonClientToStatus)(nil), // 2: pbMsgGateway.CommonClientToStatus
+	(*CommonClientToMsg)(nil),    // 3: pbMsgGateway.CommonClientToMsg
+	(*CommonCollectToMsg)(nil),   // 4: pbMsgGateway.CommonCollectToMsg
+	(*SingleMsgReq)(nil),         // 5: pbMsgGateway.SingleMsgReq
+	(*SingleMsgResp)(nil),        // 6: pbMsgGateway.SingleMsgResp
+	(*ListMsgReq)(nil),           // 7: pbMsgGateway.ListMsgReq
+	(*ListMsgResp)(nil),          // 8: pbMsgGateway.ListMsgResp
+	(*PullClientMsgReq)(nil),     // 9: pbMsgGateway.PullClientMsgReq
+	(*PullClientMsgResp)(nil),    // 10: pbMsgGateway.PullClientMsgResp
+	(*PullCollectMsgReq)(nil),    // 11: pbMsgGateway.PullCollectMsgReq
+	(*PullCollectMsgResp)(nil),   // 12: pbMsgGateway.PullCollectMsgResp
+	(*GetClientMaxSeqReq)(nil),   // 13: pbMsgGateway.GetClientMaxSeqReq
+	(*GetClientMaxSeqResp)(nil),  // 14: pbMsgGateway.GetClientMaxSeqResp
+	(*GetCollectMaxSeqReq)(nil),  // 15: pbMsgGateway.GetCollectMaxSeqReq
+	(*GetCollectMaxSeqResp)(nil), // 16: pbMsgGateway.GetCollectMaxSeqResp
+	(*GetStatusReq)(nil),         // 17: pbMsgGateway.GetStatusReq
+	(*GetStatusResp)(nil),        // 18: pbMsgGateway.GetStatusResp
 }
 var file_msg_gateway_proto_depIdxs = []int32{
-	0, // 0: pbMsgGateway.MsgGateway.ReceiveSingleMsg:input_type -> pbMsgGateway.SingleMsgReq
-	2, // 1: pbMsgGateway.MsgGateway.ReceiveListMsg:input_type -> pbMsgGateway.ListMsgReq
-	1, // 2: pbMsgGateway.MsgGateway.ReceiveSingleMsg:output_type -> pbMsgGateway.SingleMsgResp
-	3, // 3: pbMsgGateway.MsgGateway.ReceiveListMsg:output_type -> pbMsgGateway.ListMsgResp
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: pbMsgGateway.PullClientMsgReq.clientToSeq:type_name -> pbMsgGateway.CommonClientToSeq
+	3,  // 1: pbMsgGateway.PullClientMsgResp.clientToMsg:type_name -> pbMsgGateway.CommonClientToMsg
+	1,  // 2: pbMsgGateway.PullCollectMsgReq.collectToSeq:type_name -> pbMsgGateway.CommonCollectToSeq
+	4,  // 3: pbMsgGateway.PullCollectMsgResp.collectToMsg:type_name -> pbMsgGateway.CommonCollectToMsg
+	0,  // 4: pbMsgGateway.GetClientMaxSeqResp.clientToSeq:type_name -> pbMsgGateway.CommonClientToSeq
+	1,  // 5: pbMsgGateway.GetCollectMaxSeqResp.collectToSeq:type_name -> pbMsgGateway.CommonCollectToSeq
+	2,  // 6: pbMsgGateway.GetStatusResp.statusList:type_name -> pbMsgGateway.CommonClientToStatus
+	5,  // 7: pbMsgGateway.MsgGateway.ReceiveSingleMsg:input_type -> pbMsgGateway.SingleMsgReq
+	7,  // 8: pbMsgGateway.MsgGateway.ReceiveListMsg:input_type -> pbMsgGateway.ListMsgReq
+	9,  // 9: pbMsgGateway.MsgGateway.ControlPullClientMsg:input_type -> pbMsgGateway.PullClientMsgReq
+	11, // 10: pbMsgGateway.MsgGateway.ControlPullCollectMsg:input_type -> pbMsgGateway.PullCollectMsgReq
+	13, // 11: pbMsgGateway.MsgGateway.ControlGetClientMaxSeq:input_type -> pbMsgGateway.GetClientMaxSeqReq
+	15, // 12: pbMsgGateway.MsgGateway.ControlGetCollectMaxSeq:input_type -> pbMsgGateway.GetCollectMaxSeqReq
+	17, // 13: pbMsgGateway.MsgGateway.ControlGetStatus:input_type -> pbMsgGateway.GetStatusReq
+	6,  // 14: pbMsgGateway.MsgGateway.ReceiveSingleMsg:output_type -> pbMsgGateway.SingleMsgResp
+	8,  // 15: pbMsgGateway.MsgGateway.ReceiveListMsg:output_type -> pbMsgGateway.ListMsgResp
+	10, // 16: pbMsgGateway.MsgGateway.ControlPullClientMsg:output_type -> pbMsgGateway.PullClientMsgResp
+	12, // 17: pbMsgGateway.MsgGateway.ControlPullCollectMsg:output_type -> pbMsgGateway.PullCollectMsgResp
+	14, // 18: pbMsgGateway.MsgGateway.ControlGetClientMaxSeq:output_type -> pbMsgGateway.GetClientMaxSeqResp
+	16, // 19: pbMsgGateway.MsgGateway.ControlGetCollectMaxSeq:output_type -> pbMsgGateway.GetCollectMaxSeqResp
+	18, // 20: pbMsgGateway.MsgGateway.ControlGetStatus:output_type -> pbMsgGateway.GetStatusResp
+	14, // [14:21] is the sub-list for method output_type
+	7,  // [7:14] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_msg_gateway_proto_init() }
@@ -365,7 +1349,7 @@ func file_msg_gateway_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_msg_gateway_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SingleMsgReq); i {
+			switch v := v.(*CommonClientToSeq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -377,7 +1361,7 @@ func file_msg_gateway_proto_init() {
 			}
 		}
 		file_msg_gateway_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SingleMsgResp); i {
+			switch v := v.(*CommonCollectToSeq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -389,7 +1373,7 @@ func file_msg_gateway_proto_init() {
 			}
 		}
 		file_msg_gateway_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListMsgReq); i {
+			switch v := v.(*CommonClientToStatus); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -401,7 +1385,187 @@ func file_msg_gateway_proto_init() {
 			}
 		}
 		file_msg_gateway_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CommonClientToMsg); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CommonCollectToMsg); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SingleMsgReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SingleMsgResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListMsgReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListMsgResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PullClientMsgReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PullClientMsgResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PullCollectMsgReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PullCollectMsgResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetClientMaxSeqReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetClientMaxSeqResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetCollectMaxSeqReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetCollectMaxSeqResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetStatusReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_msg_gateway_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetStatusResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -419,7 +1583,7 @@ func file_msg_gateway_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_msg_gateway_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -447,6 +1611,11 @@ const _ = grpc.SupportPackageIsVersion6
 type MsgGatewayClient interface {
 	ReceiveSingleMsg(ctx context.Context, in *SingleMsgReq, opts ...grpc.CallOption) (*SingleMsgResp, error)
 	ReceiveListMsg(ctx context.Context, in *ListMsgReq, opts ...grpc.CallOption) (*ListMsgResp, error)
+	ControlPullClientMsg(ctx context.Context, in *PullClientMsgReq, opts ...grpc.CallOption) (*PullClientMsgResp, error)
+	ControlPullCollectMsg(ctx context.Context, in *PullCollectMsgReq, opts ...grpc.CallOption) (*PullCollectMsgResp, error)
+	ControlGetClientMaxSeq(ctx context.Context, in *GetClientMaxSeqReq, opts ...grpc.CallOption) (*GetClientMaxSeqResp, error)
+	ControlGetCollectMaxSeq(ctx context.Context, in *GetCollectMaxSeqReq, opts ...grpc.CallOption) (*GetCollectMaxSeqResp, error)
+	ControlGetStatus(ctx context.Context, in *GetStatusReq, opts ...grpc.CallOption) (*GetStatusResp, error)
 }
 
 type msgGatewayClient struct {
@@ -475,10 +1644,60 @@ func (c *msgGatewayClient) ReceiveListMsg(ctx context.Context, in *ListMsgReq, o
 	return out, nil
 }
 
+func (c *msgGatewayClient) ControlPullClientMsg(ctx context.Context, in *PullClientMsgReq, opts ...grpc.CallOption) (*PullClientMsgResp, error) {
+	out := new(PullClientMsgResp)
+	err := c.cc.Invoke(ctx, "/pbMsgGateway.MsgGateway/ControlPullClientMsg", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgGatewayClient) ControlPullCollectMsg(ctx context.Context, in *PullCollectMsgReq, opts ...grpc.CallOption) (*PullCollectMsgResp, error) {
+	out := new(PullCollectMsgResp)
+	err := c.cc.Invoke(ctx, "/pbMsgGateway.MsgGateway/ControlPullCollectMsg", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgGatewayClient) ControlGetClientMaxSeq(ctx context.Context, in *GetClientMaxSeqReq, opts ...grpc.CallOption) (*GetClientMaxSeqResp, error) {
+	out := new(GetClientMaxSeqResp)
+	err := c.cc.Invoke(ctx, "/pbMsgGateway.MsgGateway/ControlGetClientMaxSeq", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgGatewayClient) ControlGetCollectMaxSeq(ctx context.Context, in *GetCollectMaxSeqReq, opts ...grpc.CallOption) (*GetCollectMaxSeqResp, error) {
+	out := new(GetCollectMaxSeqResp)
+	err := c.cc.Invoke(ctx, "/pbMsgGateway.MsgGateway/ControlGetCollectMaxSeq", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgGatewayClient) ControlGetStatus(ctx context.Context, in *GetStatusReq, opts ...grpc.CallOption) (*GetStatusResp, error) {
+	out := new(GetStatusResp)
+	err := c.cc.Invoke(ctx, "/pbMsgGateway.MsgGateway/ControlGetStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgGatewayServer is the server API for MsgGateway service.
 type MsgGatewayServer interface {
 	ReceiveSingleMsg(context.Context, *SingleMsgReq) (*SingleMsgResp, error)
 	ReceiveListMsg(context.Context, *ListMsgReq) (*ListMsgResp, error)
+	ControlPullClientMsg(context.Context, *PullClientMsgReq) (*PullClientMsgResp, error)
+	ControlPullCollectMsg(context.Context, *PullCollectMsgReq) (*PullCollectMsgResp, error)
+	ControlGetClientMaxSeq(context.Context, *GetClientMaxSeqReq) (*GetClientMaxSeqResp, error)
+	ControlGetCollectMaxSeq(context.Context, *GetCollectMaxSeqReq) (*GetCollectMaxSeqResp, error)
+	ControlGetStatus(context.Context, *GetStatusReq) (*GetStatusResp, error)
 }
 
 // UnimplementedMsgGatewayServer can be embedded to have forward compatible implementations.
@@ -490,6 +1709,21 @@ func (*UnimplementedMsgGatewayServer) ReceiveSingleMsg(context.Context, *SingleM
 }
 func (*UnimplementedMsgGatewayServer) ReceiveListMsg(context.Context, *ListMsgReq) (*ListMsgResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReceiveListMsg not implemented")
+}
+func (*UnimplementedMsgGatewayServer) ControlPullClientMsg(context.Context, *PullClientMsgReq) (*PullClientMsgResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ControlPullClientMsg not implemented")
+}
+func (*UnimplementedMsgGatewayServer) ControlPullCollectMsg(context.Context, *PullCollectMsgReq) (*PullCollectMsgResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ControlPullCollectMsg not implemented")
+}
+func (*UnimplementedMsgGatewayServer) ControlGetClientMaxSeq(context.Context, *GetClientMaxSeqReq) (*GetClientMaxSeqResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ControlGetClientMaxSeq not implemented")
+}
+func (*UnimplementedMsgGatewayServer) ControlGetCollectMaxSeq(context.Context, *GetCollectMaxSeqReq) (*GetCollectMaxSeqResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ControlGetCollectMaxSeq not implemented")
+}
+func (*UnimplementedMsgGatewayServer) ControlGetStatus(context.Context, *GetStatusReq) (*GetStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ControlGetStatus not implemented")
 }
 
 func RegisterMsgGatewayServer(s *grpc.Server, srv MsgGatewayServer) {
@@ -532,6 +1766,96 @@ func _MsgGateway_ReceiveListMsg_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MsgGateway_ControlPullClientMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PullClientMsgReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgGatewayServer).ControlPullClientMsg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pbMsgGateway.MsgGateway/ControlPullClientMsg",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgGatewayServer).ControlPullClientMsg(ctx, req.(*PullClientMsgReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MsgGateway_ControlPullCollectMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PullCollectMsgReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgGatewayServer).ControlPullCollectMsg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pbMsgGateway.MsgGateway/ControlPullCollectMsg",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgGatewayServer).ControlPullCollectMsg(ctx, req.(*PullCollectMsgReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MsgGateway_ControlGetClientMaxSeq_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetClientMaxSeqReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgGatewayServer).ControlGetClientMaxSeq(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pbMsgGateway.MsgGateway/ControlGetClientMaxSeq",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgGatewayServer).ControlGetClientMaxSeq(ctx, req.(*GetClientMaxSeqReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MsgGateway_ControlGetCollectMaxSeq_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCollectMaxSeqReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgGatewayServer).ControlGetCollectMaxSeq(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pbMsgGateway.MsgGateway/ControlGetCollectMaxSeq",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgGatewayServer).ControlGetCollectMaxSeq(ctx, req.(*GetCollectMaxSeqReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MsgGateway_ControlGetStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgGatewayServer).ControlGetStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pbMsgGateway.MsgGateway/ControlGetStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgGatewayServer).ControlGetStatus(ctx, req.(*GetStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _MsgGateway_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "pbMsgGateway.MsgGateway",
 	HandlerType: (*MsgGatewayServer)(nil),
@@ -543,6 +1867,26 @@ var _MsgGateway_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReceiveListMsg",
 			Handler:    _MsgGateway_ReceiveListMsg_Handler,
+		},
+		{
+			MethodName: "ControlPullClientMsg",
+			Handler:    _MsgGateway_ControlPullClientMsg_Handler,
+		},
+		{
+			MethodName: "ControlPullCollectMsg",
+			Handler:    _MsgGateway_ControlPullCollectMsg_Handler,
+		},
+		{
+			MethodName: "ControlGetClientMaxSeq",
+			Handler:    _MsgGateway_ControlGetClientMaxSeq_Handler,
+		},
+		{
+			MethodName: "ControlGetCollectMaxSeq",
+			Handler:    _MsgGateway_ControlGetCollectMaxSeq_Handler,
+		},
+		{
+			MethodName: "ControlGetStatus",
+			Handler:    _MsgGateway_ControlGetStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

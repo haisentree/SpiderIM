@@ -54,6 +54,36 @@ func (c *ClientToMessage) FindMaxSeqByID(db *gorm.DB, client_to_message_id uint6
 	return client_to_message.MaxSeq
 }
 
+// func (c *ClientToMessage) FindMaxSeqByClientID(db *gorm.DB, ownerID uint64, clientID uint64) uint64 {
+// 	var client_to_message ClientToMessage
+// 	db.Where("client_id = ? AND recv_id = ?", ownerID, clientID).First(&client_to_message)
+// 	return client_to_message.MaxSeq
+// }
+
+// 还是直接单条查询吧，批量查询后期再该
+// 批量查询MaxSeq，后期需要优化
+func (c *ClientToMessage) FindByBatchID(db *gorm.DB, ownerID uint64, client_list []uint64) map[uint64]uint64 {
+	// 这里使用循环来单个查询，批量查询后期再写
+	result := make(map[uint64]uint64)
+	for _, v := range client_list {
+		temp := NewClientToMessage()
+		r := db.Where("client_id = ? AND recv_id = ?", ownerID, v).First(&temp)
+		if r.Error != nil {
+			log.Println("err 133")
+		}
+		result[v] = temp.MaxSeq
+	}
+
+	return result
+}
+
+// 拉取消息应该从ClientToMessage表中入手,查取同步的队列
+// 输入当前seq，拉取消息
+// func (c *ClientToMessage) PullMsg(db *gorm.DB, ownerID uint64,clientID uint64,seq uint64) []ClientToMessage {
+// 	var result []ClientMessage
+
+// }
+
 func (c *ClientToMessage) IncMaxSeq(db *gorm.DB, client_to_message_id uint64) {
 	var client_to_message ClientToMessage
 	r1 := db.First(&client_to_message, client_to_message_id)
@@ -95,11 +125,13 @@ func (m *ClientMessage) CreateMessage(db *gorm.DB, client_message_id uint64, seq
 	}
 }
 
-func (m *ClientMessage) FindMessageBySeq(db *gorm.DB, seq_start uint64, seq_end uint64) []ClientMessage {
+func (m *ClientMessage) FindMessageBySeq(db *gorm.DB, client_to_message_id uint64, seq_start uint64, seq_end uint64) []ClientMessage {
 	var client_messages []ClientMessage
-	db.Where("seq_id >= ? AND seq_id <= ?", seq_start, seq_end).Find(&client_messages)
+	db.Where("client_to_message = ? AND seq_id >= ? AND seq_id <= ?", client_to_message_id, seq_start, seq_end).Find(&client_messages)
 	return client_messages
 }
+
+// 这里先不编写批量查询
 
 // ==================================================CollectToMessage==========================================================
 type CollectToMessage struct {
@@ -180,6 +212,6 @@ func (c *CollectMessage) CreateCollectMessage(db *gorm.DB, collect_to_message_id
 
 func (c *CollectMessage) FindMessageBySeq(db *gorm.DB, collect_to_message_id uint64, seq_start uint64, seq_end uint64) []CollectMessage {
 	var collect_messages []CollectMessage
-	db.Where("seq_id >= ? AND seq_id <= ?", seq_start, seq_end).Find(&collect_messages)
+	db.Where("collect_to_message_id = AND seq_id >= ? AND seq_id <= ?", collect_to_message_id, seq_start, seq_end).Find(&collect_messages)
 	return collect_messages
 }

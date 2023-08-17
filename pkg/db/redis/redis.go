@@ -35,16 +35,19 @@ func (r *RedisDB) SetClientStatus(client_id uint64, status bool) {
 	}
 	err := r.RDB.Set(key, value, 0).Err()
 	if err != nil {
-		fmt.Println("err 2133:",err)
+		fmt.Println("err 2133:", err)
 	}
 }
 
-func (r *RedisDB) GetClientStauts(client_id uint64) string {
+func (r *RedisDB) GetClientStauts(client_id uint64) bool {
 	temp := strconv.FormatUint(client_id, 10)
 	key := fmt.Sprintf("%s$status", temp)
 	value, err := r.RDB.Get(key).Result()
 	if err != nil {
 		fmt.Println("email_code reserve fail")
 	}
-	return value
+	if len(value) == 0 {
+		return false
+	}
+	return true
 }

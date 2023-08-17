@@ -5,10 +5,44 @@ option go_package = ".;pbMsgGateway";
 service MsgGateway {
     rpc ReceiveSingleMsg(SingleMsgReq) returns(SingleMsgResp);
     rpc ReceiveListMsg(ListMsgReq) returns(ListMsgResp);
-    rpc ControlPullMsg(PullMsgReq) returns(PullMsgResp);
-    rpc ControlGetMaxSeq(GetMaxSeqReq) returns(GetMaxSeqResp);
+    rpc ControlPullClientMsg(PullClientMsgReq) returns(PullClientMsgResp);
+    rpc ControlPullCollectMsg(PullCollectMsgReq) returns(PullCollectMsgResp);
+    rpc ControlGetClientMaxSeq(GetClientMaxSeqReq) returns(GetClientMaxSeqResp);
+    rpc ControlGetCollectMaxSeq(GetCollectMaxSeqReq) returns(GetCollectMaxSeqResp);
     rpc ControlGetStatus(GetStatusReq) returns(GetStatusResp);
 }
+message CommonClientToSeq {
+    uint64 clientID = 1;
+    uint64 seqID = 2;
+}
+
+message CommonCollectToSeq {
+    uint64 collectID = 1;
+    uint64 seqID = 2;
+}
+
+message CommonClientToStatus {
+    uint64 clientID = 1;
+    bool isOnline = 2;
+}
+
+message CommonClientToMsg {
+    uint64 seqID = 1;
+    uint64 ownerID = 2;
+    uint64 clientID = 3;
+    bool   isSneder = 4;
+    int64 createTime = 5;
+    string content = 6;
+}
+
+message CommonCollectToMsg {
+    uint64 seqID = 1;
+    uint64 collectID = 2;
+    uint64 sendID = 3;
+    int64 createTime = 4;
+    string content = 5;
+}
+
 
 message SingleMsgReq {
     uint64 sendID = 1;
@@ -36,26 +70,46 @@ message ListMsgResp {
     string message = 2;
 }
 
-message PullMsgReq {
-
+message PullClientMsgReq {
+    uint64 ownerID = 1;
+    repeated CommonClientToSeq clientToSeq = 2;
 }
 
-message PullMsgResp {
-
+message PullClientMsgResp {
+    uint32 code = 1;
+    repeated CommonClientToMsg clientToMsg = 2;
 }
 
-message GetMaxSeqReq {
-
+message PullCollectMsgReq {
+    repeated CommonCollectToSeq collectToSeq = 1;
 }
 
-message GetMaxSeqResp {
+message PullCollectMsgResp {
+    uint32 code = 1;
+    repeated CommonCollectToMsg collectToMsg = 2;
+}
 
+message GetClientMaxSeqReq {
+    uint64 ownerID = 1;
+    repeated uint64 clientList = 2;
+}
+
+message GetClientMaxSeqResp {
+    repeated CommonClientToSeq clientToSeq = 1;
+}
+
+message GetCollectMaxSeqReq {
+    repeated uint64 collectList = 1;
+}
+
+message GetCollectMaxSeqResp {
+    repeated CommonCollectToSeq collectToSeq = 1;
 }
 
 message GetStatusReq {
-
+    repeated uint64 clientIDList = 1;
 }
 
 message GetStatusResp {
-
+    repeated CommonClientToStatus statusList = 1;
 }

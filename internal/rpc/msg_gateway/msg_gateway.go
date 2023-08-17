@@ -12,6 +12,7 @@ import (
 
 	DBMysql "SpiderIM/pkg/db/mysql"
 	DBModel "SpiderIM/pkg/db/mysql/model"
+	DBRedis "SpiderIM/pkg/db/redis"
 	pbMsgGateway "SpiderIM/pkg/proto/msg_gateway"
 	pkgMessage "SpiderIM/pkg/public/message"
 	"SpiderIM/pkg/rabbitmq"
@@ -20,6 +21,7 @@ import (
 var (
 	MessageProducer *rabbitmq.Producer
 	MysqlDB         DBMysql.MysqlDB
+	RedisDB         DBRedis.RedisDB
 )
 
 type rpcMsgGateway struct {
@@ -36,6 +38,7 @@ func (rpc *rpcMsgGateway) RpcMsgGateway_Init() {
 	MessageProducer.Producer_Init("test", "send")
 	MysqlDB.InitMysqlDB()
 	MysqlDB.DB.AutoMigrate(&DBModel.Client{}, &DBModel.ClientToMessage{}, &DBModel.ClientMessage{})
+	RedisDB.InitRedisDB()
 }
 
 func (rpc *rpcMsgGateway) ReceiveSingleMsg(_ context.Context, req *pbMsgGateway.SingleMsgReq) (*pbMsgGateway.SingleMsgResp, error) {
@@ -120,6 +123,103 @@ func (rpc *rpcMsgGateway) ReceiveListMsg(_ context.Context, req *pbMsgGateway.Li
 	return &pbMsgGateway.ListMsgResp{Code: 200, Message: "success"}, nil
 }
 
+func (rpc *rpcMsgGateway) ControlPullClientMsg(_ context.Context, req *pbMsgGateway.PullClientMsgReq) (*pbMsgGateway.PullClientMsgResp, error) {
+	client_to_msg := DBModel.NewClientToMessage()
+	client_msg := DBModel.NewClientMessage()
+	resp := &pbMsgGateway.PullClientMsgResp{
+		Code: 200,
+	}
+	for _, v := range req.ClientToSeq {
+		find_client_to_msg := client_to_msg.FindByClientIDAndRecvID(MysqlDB.DB, req.OwnerID, v.ClientID)
+		if v.SeqID < find_client_to_msg.MaxSeq {
+			m := client_msg.FindMessageBySeq(MysqlDB.DB, find_client_to_msg.ID, v.SeqID, find_client_to_msg.MaxSeq)
+			for _, val := range m {
+				temp := pbMsgGateway.CommonClientToMsg{
+					SeqID:      val.SeqID,
+					OwnerID:    req.OwnerID,
+					ClientID:   v.ClientID,
+					IsSneder:   val.IsSender,
+					CreateTime: val.CreatedAt.Unix(),
+					Content:    val.Content,
+				}
+				resp.ClientToMsg = append(resp.ClientToMsg, &temp)
+			}
+		}
+	}
+	return resp, nil
+}
+
+func (rpc *rpcMsgGateway) ControlPullCollectMsg(_ context.Context, req *pbMsgGateway.PullCollectMsgReq) (*pbMsgGateway.PullCollectMsgResp, error) {
+	collect_to_msg := DBModel.NewCollectToMessage()
+	collect_msg := DBModel.NewCollectMessage()
+	resp := &pbMsgGateway.PullCollectMsgResp{
+		Code: 200,
+	}
+	for _, v := range req.CollectToSeq {
+		find_collect_to_msg := collect_to_msg.FindByCollectID(MysqlDB.DB, v.CollectID)
+		if v.SeqID < find_collect_to_msg.MaxSeq {
+			m := collect_msg.FindMessageBySeq(MysqlDB.DB, v.CollectID, v.SeqID, find_collect_to_msg.MaxSeq)
+			for _, val := range m {
+				temp := pbMsgGateway.CommonCollectToMsg{
+					SeqID:      val.SeqID,
+					CollectID:  v.CollectID,
+					SendID:     val.SendID,
+					CreateTime: val.CreatedAt.Unix(),
+					Content:    val.Content,
+				}
+				resp.CollectToMsg = append(resp.CollectToMsg, &temp)
+			}
+		}
+	}
+
+	return resp, nil
+}
+
+func (rpc *rpcMsgGateway) ControlGetClientMaxSeq(_ context.Context, req *pbMsgGateway.GetClientMaxSeqReq) (*pbMsgGateway.GetClientMaxSeqResp, error) {
+	client_to_msg := DBModel.NewClientToMessage()
+	resp := &pbMsgGateway.GetClientMaxSeqResp{}
+	for _, v := range req.ClientList {
+		find_client_to_msg := client_to_msg.FindByClientIDAndRecvID(MysqlDB.DB, req.OwnerID, v)
+		temp := &pbMsgGateway.CommonClientToSeq{
+			ClientID: v,
+			SeqID:    find_client_to_msg.MaxSeq,
+		}
+		resp.ClientToSeq = append(resp.ClientToSeq, temp)
+	}
+	return resp, nil
+}
+
+func (rpc *rpcMsgGateway) ControlGetCollectMaxSeq(_ context.Context, req *pbMsgGateway.GetCollectMaxSeqReq) (*pbMsgGateway.GetCollectMaxSeqResp, error) {
+	collect_to_msg := DBModel.NewCollectToMessage()
+	resp := &pbMsgGateway.GetCollectMaxSeqResp{}
+	for _, v := range req.CollectList {
+		find_collect_to_msg := collect_to_msg.FindByCollectID(MysqlDB.DB, v)
+		temp := &pbMsgGateway.CommonCollectToSeq{
+			CollectID: v,
+			SeqID:     find_collect_to_msg.MaxSeq,
+		}
+		resp.CollectToSeq = append(resp.CollectToSeq, temp)
+	}
+
+	return resp, nil
+}
+
+func (rpc *rpcMsgGateway) ControlGetStatus(_ context.Context, req *pbMsgGateway.GetStatusReq) (*pbMsgGateway.GetStatusResp, error) {
+
+	resp := &pbMsgGateway.GetStatusResp{}
+
+	for _, v := range req.ClientIDList {
+		s := RedisDB.GetClientStauts(v)
+		temp := &pbMsgGateway.CommonClientToStatus{
+			ClientID: v,
+			IsOnline: s,
+		}
+		resp.StatusList = append(resp.StatusList, temp)
+	}
+	return resp, nil
+}
+
+// 获取MaxSeq，用户对比本地数据库，按需拉去消息
 
 func (rpc *rpcMsgGateway) Run() {
 
