@@ -9,7 +9,7 @@ service MsgGateway {
     rpc ControlPullCollectMsg(PullCollectMsgReq) returns(PullCollectMsgResp);
     rpc ControlGetClientMaxSeq(GetClientMaxSeqReq) returns(GetClientMaxSeqResp);
     rpc ControlGetCollectMaxSeq(GetCollectMaxSeqReq) returns(GetCollectMaxSeqResp);
-    rpc ControlGetStatus(GetStatusReq) returns(GetStatusResp);
+    rpc ControlGetClientStatus(GetClientStatusReq) returns(GetClientStatusResp);
 }
 message CommonClientToSeq {
     uint64 clientID = 1;
@@ -106,10 +106,10 @@ message GetCollectMaxSeqResp {
     repeated CommonCollectToSeq collectToSeq = 1;
 }
 
-message GetStatusReq {
+message GetClientStatusReq {
     repeated uint64 clientIDList = 1;
 }
 
-message GetStatusResp {
+message GetClientStatusResp {
     repeated CommonClientToStatus statusList = 1;
 }

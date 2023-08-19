@@ -18,8 +18,9 @@ const (
 	Group_List_Message_Request    = 4 // 该条消息包含recv数组，需要进行转发消息,自带seq
 	Control_Pull_Client_Message   = 5 // 首次登录，刷新时候，同步与数据库中的消息
 	Control_Pull_Collect_Message  = 6
-	Control_Get_Max_Seq           = 7 // 获取seq，与本都seq对比
-	Control_Get_Status            = 8 // 获取client的在线状态
+	Control_Get_Client_Max_Seq    = 7 // 获取seq，与本都seq对比
+	Control_Get_Collect_Max_Seq   = 8
+	Control_Get_Client_Status     = 9 // 获取client的在线状态
 )
 
 // 客户端类型
@@ -42,6 +43,17 @@ type CommonClientToSeq struct {
 	SeqID    uint64 `json:"seq_id" validate:"required"`
 }
 
+type CommonCollectToSeq struct {
+	CollectID uint64 `json:"collect_id" validate:"required"`
+	SeqID     uint64 `json:"seq_id" validate:"required"`
+}
+
+type CommonClientToStatus struct {
+	ClientID uint64 `json:"client_id" validate:"required"`
+	IsOnline uint64 `json:"is_online" validate:"required"`
+}
+
+// ==========================
 type SingleCommMsgReq struct {
 	RecvID  uint64 `json:"recv_id" validate:"required"`
 	Content string `json:"content" validate:"required"`
@@ -63,16 +75,28 @@ type GroupListMsgReq struct {
 	Content    string   `json:"content" validate:"required"`
 }
 
-type PullListMsgReq struct {
+type PullClientMsgReq struct {
+	OwnerID     uint64              `json:"owner_id" validate:"required"`
 	ClientToSeq []CommonClientToSeq `json:"client_to_seq" validate:"required"`
 }
 
-type GetMaxSeqReq struct {
+type PullCollectMsgReq struct {
+	CollectID    uint64               `json:"collect_id" validate:"required"`
+	CollectToSeq []CommonCollectToSeq `json:"collect_to_seq" validate:"required"`
+}
+
+type GetClientMaxSeqReq struct {
+	OwnerID    uint64   `json:"owner_id" validate:"required"`
 	ClientList []uint64 `json:"client_list" validate:"required"`
 }
 
-type GetStatusReq struct {
-	ClientToSeq []CommonClientToSeq `json:"client_to_seq" validate:"required"`
+type GetCollectMaxSeqReq struct {
+	OwnerID     uint64   `json:"owner_id" validate:"required"`
+	CollectList []uint64 `json:"collect_list" validate:"required"`
+}
+
+type GetClientStatusReq struct {
+	ClientList []uint64 `json:"client_list" validate:"required"`
 }
 
 // websocket接收到的响应消息

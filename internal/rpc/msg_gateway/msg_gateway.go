@@ -204,9 +204,9 @@ func (rpc *rpcMsgGateway) ControlGetCollectMaxSeq(_ context.Context, req *pbMsgG
 	return resp, nil
 }
 
-func (rpc *rpcMsgGateway) ControlGetStatus(_ context.Context, req *pbMsgGateway.GetStatusReq) (*pbMsgGateway.GetStatusResp, error) {
+func (rpc *rpcMsgGateway) ControlGetClientStatus(_ context.Context, req *pbMsgGateway.GetClientStatusReq) (*pbMsgGateway.GetClientStatusResp, error) {
 
-	resp := &pbMsgGateway.GetStatusResp{}
+	resp := &pbMsgGateway.GetClientStatusResp{}
 
 	for _, v := range req.ClientIDList {
 		s := RedisDB.GetClientStauts(v)

@@ -27,7 +27,9 @@ func (ws *WServer) msgParse(conn *WSClient, binaryMsg []byte) {
 		ws.parseSingleRelayMsg(conn, &m)
 	case pkgMessage.Group_Common_Message_Request:
 		log.Println("group msg")
-		ws.paraGroupCommMsg(conn, &m)
+		ws.parseGroupCommMsg(conn, &m)
+	case pkgMessage.Group_List_Message_Request:
+		ws.parseGroupListMsg(conn, &m)
 	default:
 		log.Println("clientType error")
 	}
@@ -69,7 +71,7 @@ func (ws *WServer) parseSingleRelayMsg(conn *WSClient, msg *pkgMessage.CommonMsg
 	}
 }
 
-func (ws *WServer) paraGroupCommMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
+func (ws *WServer) parseGroupCommMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
 	d := &pkgMessage.GroupCommMsgReq{}
 	json.Unmarshal([]byte(msg.Data), &d)
 	if err := Validate.Struct(d); err != nil {
@@ -93,7 +95,7 @@ func (ws *WServer) paraGroupCommMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
 
 }
 
-func (ws *WServer) paraGroupListMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
+func (ws *WServer) parseGroupListMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
 	d := &pkgMessage.GroupListMsgReq{}
 	json.Unmarshal([]byte(msg.Data), &d)
 	if err := Validate.Struct(d); err != nil {
@@ -105,14 +107,99 @@ func (ws *WServer) paraGroupListMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
 		SendID:  msg.SendID,
 		RecvID:  d.RecvIDList,
 		MsgType: uint32(msg.MessageType),
-		SeqID: d.SeqID,
+		SeqID:   d.SeqID,
 		Content: d.Content,
 	}
 
-	resp, err := MsgGatewaySrvClient.ReceiveLisgMsg(context.Background(), req)
+	resp, err := MsgGatewaySrvClient.ReceiveListMsg(context.Background(), req)
 	if err != nil {
 		log.Println("case 10afs error")
 	}
 
 	log.Println("clientMsg case 10 resp:", resp.Message)
+}
+
+func (ws *WServer) parsePullClientMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
+	d := &pkgMessage.PullClientMsgReq{}
+	json.Unmarshal([]byte(msg.Data), &d)
+	if err := Validate.Struct(d); err != nil {
+		log.Println("validate error: 1423", err)
+		return
+	}
+
+	req := &pbMsgGateway.PullClientMsgReq{
+		OwnerID: d.OwnerID,
+	}
+
+	for _, v := range d.ClientToSeq {
+		temp := &pbMsgGateway.CommonClientToSeq{ClientID: v.ClientID, SeqID: v.SeqID}
+		req.ClientToSeq = append(req.ClientToSeq, temp)
+	}
+
+	resp, err := MsgGatewaySrvClient.ControlPullClientMsg(context.Background(), req)
+	if err != nil {
+		log.Println("case 10afs error")
+	}
+	log.Println("clientMsg case 10 resp:", resp.ClientToMsg)
+}
+
+func (ws *WServer) parsePullCollectMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
+	d := &pkgMessage.PullCollectMsgReq{}
+	json.Unmarshal([]byte(msg.Data), &d)
+	if err := Validate.Struct(d); err != nil {
+		log.Println("validate error: 1423", err)
+		return
+	}
+
+	req := &pbMsgGateway.PullCollectMsgReq{}
+
+	for _, v := range d.CollectToSeq {
+		temp := &pbMsgGateway.CommonCollectToSeq{CollectID: v.CollectID, SeqID: v.SeqID}
+		req.CollectToSeq = append(req.CollectToSeq, temp)
+	}
+
+	resp, err := MsgGatewaySrvClient.ControlPullCollectMsg(context.Background(), req)
+	if err != nil {
+		log.Println("case 10afs error")
+	}
+	log.Println("clientMsg case 10 resp:", resp.CollectToMsg)
+}
+
+func (ws *WServer) parseGetClientMaxSeq(conn *WSClient, msg *pkgMessage.CommonMsg) {
+	d := &pkgMessage.GetClientMaxSeqReq{}
+	json.Unmarshal([]byte(msg.Data), &d)
+	if err := Validate.Struct(d); err != nil {
+		log.Println("validate error: 1423", err)
+		return
+	}
+
+	req := &pbMsgGateway.GetClientMaxSeqReq{
+		OwnerID:    d.OwnerID,
+		ClientList: d.ClientList,
+	}
+
+	resp, err := MsgGatewaySrvClient.ControlGetClientMaxSeq(context.Background(), req)
+	if err != nil {
+		log.Println("case 10afs error")
+	}
+	log.Println("clientMsg case 10 resp:", resp.ClientToSeq)
+}
+
+func (ws *WServer) parseGetClientStatus(conn *WSClient, msg *pkgMessage.CommonMsg) {
+	d := &pkgMessage.GetClientStatusReq{}
+	json.Unmarshal([]byte(msg.Data), &d)
+	if err := Validate.Struct(d); err != nil {
+		log.Println("validate error: 1423", err)
+		return
+	}
+
+	req := &pbMsgGateway.GetClientStatusReq{
+		ClientIDList: d.ClientList,
+	}
+
+	resp, err := MsgGatewaySrvClient.ControlGetClientStatus(context.Background(), req)
+	if err != nil {
+		log.Println("case 10afs error")
+	}
+	log.Println("clientMsg case 10 resp:", resp.StatusList)
 }
