@@ -107,7 +107,7 @@ func (c *ClientToMessage) IncMaxSeq(db *gorm.DB, client_to_message_id uint64) {
 type ClientMessage struct {
 	Base
 	ClientToMessageID uint64
-	SeqID             uint64 `gorm:"index;unique"`
+	SeqID             uint64 `gorm:"index"`
 	Content           string
 	IsSender          bool
 }
@@ -133,7 +133,7 @@ func (m *ClientMessage) CreateMessage(db *gorm.DB, client_message_id uint64, seq
 
 func (m *ClientMessage) FindMessageBySeq(db *gorm.DB, client_to_message_id uint64, seq_start uint64, seq_end uint64) []ClientMessage {
 	var client_messages []ClientMessage
-	db.Where("client_to_message = ? AND seq_id >= ? AND seq_id <= ?", client_to_message_id, seq_start, seq_end).Find(&client_messages)
+	db.Where("client_to_message_id = ? AND seq_id >= ? AND seq_id <= ?", client_to_message_id, seq_start, seq_end).Find(&client_messages)
 	return client_messages
 }
 
@@ -168,7 +168,7 @@ func (c *CollectToMessage) CreateCollectToMessage(db *gorm.DB) uint64 {
 
 func (c *CollectToMessage) FindByCollectID(db *gorm.DB, collect_to_msg_id uint64) CollectToMessage {
 	var collect_to_message CollectToMessage
-	result := db.First(&collect_to_message, collect_to_msg_id)
+	result := db.Where("id = ?", collect_to_msg_id).First(&collect_to_message)
 	if result.Error != nil {
 		log.Println("23546")
 	}
@@ -192,7 +192,7 @@ func (c *CollectToMessage) IncMaxseq(db *gorm.DB, collect_to_msg_id uint64) {
 type CollectMessage struct {
 	Base
 	CollectToMessageID uint64
-	SeqID              uint64 `gorm:"index;unique"`
+	SeqID              uint64 `gorm:"index"`
 	SendID             uint64
 	Content            string
 }

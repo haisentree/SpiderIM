@@ -23,6 +23,7 @@ func init() {
 	SrvClient_Init()
 	DBMysql_Init()
 	Validate_Init()
+	RedisDB_Init()
 }
 
 func SrvClient_Init() {

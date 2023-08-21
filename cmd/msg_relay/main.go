@@ -68,7 +68,7 @@ func main() {
 	forever := make(chan bool)
 
 	// 连接websocket
-	wsConn, _, err := websocket.DefaultDialer.Dial("ws://192.168.45.128:8848/ws?clientID=1&clientUUID=9da5c08b-6e3f-401b-ae5e-394cb5504cbf&platformID=0", nil)
+	wsConn, _, err := websocket.DefaultDialer.Dial("ws://192.168.45.128:8848/ws?clientID=37&clientUUID=fbeaedca-ca5b-4cf9-a53d-e5f1e5b59b82&platformID=0", nil)
 	if err != nil {
 		log.Println("ws conn error")
 	}
@@ -82,7 +82,7 @@ func main() {
 
 	// // 读取消息
 	// messageType, p, err := conn.ReadMessage()
-	// if err != nil { 
+	// if err != nil {
 	// 	log.Fatal(err)
 	// }
 

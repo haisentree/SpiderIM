@@ -37,7 +37,8 @@ func (rpc *rpcMsgGateway) RpcMsgGateway_Init() {
 	MessageProducer = &rabbitmq.Producer{}
 	MessageProducer.Producer_Init("test", "send")
 	MysqlDB.InitMysqlDB()
-	MysqlDB.DB.AutoMigrate(&DBModel.Client{}, &DBModel.ClientToMessage{}, &DBModel.ClientMessage{})
+	MysqlDB.DB.AutoMigrate(&DBModel.Client{}, &DBModel.ClientToMessage{}, &DBModel.ClientMessage{},
+		&DBModel.CollectToMessage{}, &DBModel.CollectMessage{})
 	RedisDB.InitRedisDB()
 }
 
@@ -46,6 +47,7 @@ func (rpc *rpcMsgGateway) ReceiveSingleMsg(_ context.Context, req *pbMsgGateway.
 	// 1.给消息分配seq
 	var seq uint64
 	switch req.MsgType {
+	// 该功能过程较多，需要讨论失败带来的错误情况，以及以后
 	case pkgMessage.Single_Common_Message_Request:
 		client_to_msg := DBModel.NewClientToMessage()
 		temp := client_to_msg.FindByClientIDAndRecvID(MysqlDB.DB, req.SendID, req.RecvID)
@@ -56,7 +58,11 @@ func (rpc *rpcMsgGateway) ReceiveSingleMsg(_ context.Context, req *pbMsgGateway.
 		client_msg := DBModel.NewClientMessage()
 		client_msg.CreateMessage(MysqlDB.DB, temp.ID, seq, req.Content, true)
 		temp = client_to_msg.FindByClientIDAndRecvID(MysqlDB.DB, req.RecvID, req.SendID)
-		client_msg.CreateMessage(MysqlDB.DB, temp.ID, seq, req.Content, false)
+		log.Println("temp:", temp)
+		client_msg2 := DBModel.NewClientMessage()
+		client_msg2.CreateMessage(MysqlDB.DB, temp.ID, seq, req.Content, false)
+		client_to_msg2 := DBModel.NewClientToMessage()
+		client_to_msg2.IncMaxSeq(MysqlDB.DB, temp.ID)
 
 	case pkgMessage.Group_Common_Message_Request:
 		collect_to_msg := DBModel.NewCollectToMessage()
@@ -67,6 +73,8 @@ func (rpc *rpcMsgGateway) ReceiveSingleMsg(_ context.Context, req *pbMsgGateway.
 		// 2.将消息存储到数据库中,一条group消息只需要存储一遍
 		collect_msg := DBModel.NewCollectMessage()
 		collect_msg.CreateCollectMessage(MysqlDB.DB, temp.ID, req.Content, seq, req.SendID)
+
+		return &pbMsgGateway.SingleMsgResp{Code: 200, Message: "success"}, nil
 	default:
 		seq = 0
 	}
@@ -107,6 +115,7 @@ func (rpc *rpcMsgGateway) ReceiveListMsg(_ context.Context, req *pbMsgGateway.Li
 
 				CreateTime: time.Now().Unix(), // 与存储的create时间不完全相同
 			}
+			log.Println("List Message Divide into MQ")
 
 			j, err := json.Marshal(&m)
 			if err != nil {

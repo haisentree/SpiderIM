@@ -89,9 +89,9 @@ func (ws *WServer) wsHandler(w http.ResponseWriter, r *http.Request) {
 
 	// 2.查询clientID、clientUUID
 	dbClient := DBModel.NewClient()
-	dbClient.FindByClientID(MysqlDB.DB, clientID_uint64)
-	if dbClient.UUID != clientUUID[0] {
-		log.Println("uuid error")
+	client_data := dbClient.FindByClientID(MysqlDB.DB, clientID_uint64)
+	if client_data.UUID != clientUUID[0] {
+		log.Println("uuid error:", clientUUID[0], "right:", client_data.UUID, "clientID:", clientID_uint64)
 		return
 	}
 
@@ -109,7 +109,7 @@ func (ws *WServer) wsHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	newConn := &WSClient{Conn: conn, platformID: uint8(platformID_uint8), clientID: dbClient.ID, clinetType: dbClient.Type}
+	newConn := &WSClient{Conn: conn, platformID: uint8(platformID_uint8), clientID: client_data.ID, clinetType: client_data.Type}
 	ws.addClientConn(newConn)
 	// 用户连接成功，对连接的数据进行读取
 	go ws.readMsg(newConn)
@@ -149,7 +149,7 @@ func (ws *WServer) readMsg(conn *WSClient) {
 		if conn.platformID == 0 {
 			// 1.解析消息
 			log.Println("recv platformID==1 message")
-			var messageToMQ pkgPublic.MessageToMQ
+			var messageToMQ pkgPublic.SingleMsgToMQ
 			json.Unmarshal(message, &messageToMQ)
 			// 2.查看RecvID是否连接在当前wss
 			_, ok := ws.wsClientToConn[uint64(messageToMQ.RecvID)]
@@ -186,6 +186,7 @@ func (ws *WServer) addClientConn(conn *WSClient) {
 	i := make(map[uint8]*WSClient)
 	i[conn.platformID] = conn
 	ws.wsClientToConn[conn.clientID] = i
+	log.Println("add client conn")
 	RedisDB.SetClientStatus(conn.clientID, true)
 	// reids 保存client在线状态
 }

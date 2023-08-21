@@ -32,6 +32,14 @@ func (ws *WServer) msgParse(conn *WSClient, binaryMsg []byte) {
 		ws.parseGroupListMsg(conn, &m)
 	case pkgMessage.Control_Pull_Client_Message:
 		ws.parsePullClientMsg(conn, &m)
+	case pkgMessage.Control_Pull_Collect_Message:
+		ws.parsePullCollectMsg(conn, &m)
+	case pkgMessage.Control_Get_Client_Max_Seq:
+		ws.parseGetClientMaxSeq(conn, &m)
+	case pkgMessage.Control_Get_Collect_Max_Seq:
+		log.Println("clientType Control_Get_Collect_Max_Seq")
+	case pkgMessage.Control_Get_Client_Status:
+		ws.parseGetClientStatus(conn, &m)
 	default:
 		log.Println("clientType error")
 	}
@@ -83,7 +91,7 @@ func (ws *WServer) parseGroupCommMsg(conn *WSClient, msg *pkgMessage.CommonMsg) 
 
 	req := &pbMsgGateway.SingleMsgReq{
 		SendID:  msg.SendID,
-		RecvID:  d.RecvID,
+		RecvID:  d.RecvID, // 这里就是CollectID
 		MsgType: uint32(msg.MessageType),
 		Content: d.Content,
 	}
@@ -143,6 +151,7 @@ func (ws *WServer) parsePullClientMsg(conn *WSClient, msg *pkgMessage.CommonMsg)
 		log.Println("case 10afs error")
 	}
 	log.Println("clientMsg case 10 resp:", resp.ClientToMsg)
+	// 将消息返回给conn
 }
 
 func (ws *WServer) parsePullCollectMsg(conn *WSClient, msg *pkgMessage.CommonMsg) {
@@ -186,6 +195,8 @@ func (ws *WServer) parseGetClientMaxSeq(conn *WSClient, msg *pkgMessage.CommonMs
 	}
 	log.Println("clientMsg case 10 resp:", resp.ClientToSeq)
 }
+
+// 少些了一个parseGetCollectMaxSeq
 
 func (ws *WServer) parseGetClientStatus(conn *WSClient, msg *pkgMessage.CommonMsg) {
 	d := &pkgMessage.GetClientStatusReq{}

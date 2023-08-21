@@ -81,6 +81,7 @@ type PullClientMsgReq struct {
 	ClientToSeq []CommonClientToSeq `json:"client_to_seq" validate:"required"`
 }
 
+// 第一个字段丢弃，该请求查取不同collect的消息
 type PullCollectMsgReq struct {
 	CollectID    uint64               `json:"collect_id" validate:"required"`
 	CollectToSeq []CommonCollectToSeq `json:"collect_to_seq" validate:"required"`
