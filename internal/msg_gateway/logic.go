@@ -30,6 +30,8 @@ func (ws *WServer) msgParse(conn *WSClient, binaryMsg []byte) {
 		ws.parseGroupCommMsg(conn, &m)
 	case pkgMessage.Group_List_Message_Request:
 		ws.parseGroupListMsg(conn, &m)
+	case pkgMessage.Control_Pull_Client_Message:
+		ws.parsePullClientMsg(conn, &m)
 	default:
 		log.Println("clientType error")
 	}

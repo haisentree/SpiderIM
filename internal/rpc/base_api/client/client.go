@@ -30,7 +30,8 @@ func New_rpcBaseAPIClient(port int) *rpcBaseAPIClient {
 
 func (rpc *rpcBaseAPIClient) RpcBaseAPIClient_Init() {
 	MysqlDB.InitMysqlDB()
-	MysqlDB.DB.AutoMigrate(&DBModel.Client{})
+	// 关联的表自动创建了
+	MysqlDB.DB.AutoMigrate(&DBModel.Client{},&DBModel.CollectToMessage{})
 }
 
 // client,group,server
@@ -39,7 +40,7 @@ func (rpc *rpcBaseAPIClient) CreateClient(_ context.Context, req *pbBaseAPIClien
 	// 从配置文件中读取
 	var WsClientCreateKey = "dsfrserererst"
 	var WsServerCreateKey = "sdfdsfdsfsd"
-
+	var client_type uint8
 	// 1.校验key
 	// 如果处理错误，直接return nil，error，不用return空结构体数据
 	switch req.ClientType {
@@ -48,25 +49,27 @@ func (rpc *rpcBaseAPIClient) CreateClient(_ context.Context, req *pbBaseAPIClien
 		if req.SecretKey != WsServerCreateKey {
 			return &pbBaseAPIClient.CreateClientResp{}, grpc.Errorf(400, "Server Secret Key Fail")
 		}
+		client_type = pkgMessage.Relay_Client
 	case pkgMessage.Android_Platform, pkgMessage.IOS_Platform, pkgMessage.PC_Platform, pkgMessage.Web_Platform:
 		log.Println("deal client key")
 		if req.SecretKey != WsClientCreateKey {
 			return &pbBaseAPIClient.CreateClientResp{}, grpc.Errorf(400, "Client Secret Key Fail")
 		}
+		client_type = pkgMessage.Common_Client
 	default:
 		log.Println("Secret Key invalid")
 		return &pbBaseAPIClient.CreateClientResp{}, grpc.Errorf(400, "Secret Key invalid")
 	}
 	// 创建client
-	clientUUID := uuid.NewV4().String()
+	client_uuid := uuid.NewV4().String()
 
-	client := &DBModel.Client{Type: uint8(req.ClientType), UUID: clientUUID}
+	client := &DBModel.Client{Type: client_type, UUID: client_uuid}
 	result := MysqlDB.DB.Create(client)
 	if result.Error != nil {
 		return &pbBaseAPIClient.CreateClientResp{}, grpc.Errorf(400, "mysql insert error ")
 	}
 	// unit unit32 uni64 int 等类型后期需要统一处理一下
-	return &pbBaseAPIClient.CreateClientResp{ClientID: client.ID}, nil
+	return &pbBaseAPIClient.CreateClientResp{ClientID: client.ID, ClientUUID: client_uuid}, nil
 }
 
 func (rpc *rpcBaseAPIClient) CreateClientToMessage(_ context.Context, req *pbBaseAPIClient.CreateClientToMessageReq) (*pbBaseAPIClient.CreateClientToMessaageResp, error) {
@@ -78,8 +81,8 @@ func (rpc *rpcBaseAPIClient) CreateClientToMessage(_ context.Context, req *pbBas
 
 func (rpc *rpcBaseAPIClient) CreateCollectToMessage(_ context.Context, req *pbBaseAPIClient.CreateCollectToMessageReq) (*pbBaseAPIClient.CreateCollectToMessageResp, error) {
 	collect_to_msg := DBModel.NewCollectToMessage()
-	collect_to_msg.CreateCollectToMessage(MysqlDB.DB)
-	resp := &pbBaseAPIClient.CreateCollectToMessageResp{CollectToMsgID: 200}
+	collect_to_msg_id := collect_to_msg.CreateCollectToMessage(MysqlDB.DB)
+	resp := &pbBaseAPIClient.CreateCollectToMessageResp{CollectToMsgID: collect_to_msg_id}
 	return resp, nil
 }
 

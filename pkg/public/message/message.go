@@ -26,7 +26,8 @@ const (
 // 客户端类型
 const (
 	Common_Client  = 1
-	Collect_Client = 2
+	Collect_Client = 2 // 实际中没有该类型
+	Relay_Client   = 3
 )
 
 // =============================================WServer===============================================

@@ -28,6 +28,12 @@ func NewClientToMessage() *ClientToMessage {
 
 // 创建ClientMessage
 func (c *ClientToMessage) CreateClientToMessage(db *gorm.DB, client_id uint64, recv_id uint64) uint64 {
+	// 首先要校验一下client对应的recv是否存在
+	temp := c.FindByClientIDAndRecvID(db, client_id, recv_id)
+	if temp.ID != 0 {
+		return temp.ID
+	}
+
 	c.ClientID = client_id
 	c.RecvID = recv_id
 	c.MinSeq = 1
@@ -150,13 +156,14 @@ func NewCollectToMessage() *CollectToMessage {
 	return c
 }
 
-func (c *CollectToMessage) CreateCollectToMessage(db *gorm.DB) {
+func (c *CollectToMessage) CreateCollectToMessage(db *gorm.DB) uint64 {
 	c.MinSeq = 1
 	c.MaxSeq = 1
 	result := db.Create(c)
 	if result.Error != nil {
 		log.Println("err 2132")
 	}
+	return c.ID
 }
 
 func (c *CollectToMessage) FindByCollectID(db *gorm.DB, collect_to_msg_id uint64) CollectToMessage {

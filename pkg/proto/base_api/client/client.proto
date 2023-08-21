@@ -14,7 +14,8 @@ message CreateClientReq {
 }
 
 message CreateClientResp {
-    uint64 clientID=1;
+    uint64 clientID = 1;
+    string clientUUID = 2;
 }
 
 message CreateClientToMessageReq {
@@ -23,7 +24,6 @@ message CreateClientToMessageReq {
 }
 
 message CreateClientToMessaageResp{
-
     uint64 clientToMsgID = 1;
 }   
 
@@ -32,5 +32,5 @@ message CreateCollectToMessageReq{
 }
 
 message CreateCollectToMessageResp {
-    uint32 collectToMsgID = 1;
+    uint64 collectToMsgID = 1;
 }

@@ -18,11 +18,11 @@ import (
 // 这个接口只在创建user时候调用与client进行绑定
 type CreateClientReq struct {
 	SecretKey  string `json:"secret_key" binding:"required,max=32"`
-	ClientType int    `json:"client_type" binding:"required"`
+	ClientType uint64 `json:"client_type" binding:"required"`
 }
 
 type CreateClientToMessageReq struct {
-	ClientID uint64 `josn:"client_id" binding:"required"`
+	ClientID uint64 `json:"client_id" binding:"required"`
 	RecvID   uint64 `json:"recv_id" binding:"required"`
 }
 
@@ -45,7 +45,7 @@ func CreateClient(c *gin.Context) {
 		return
 	}
 	// User存储clientID、clientUUID
-	c.JSON(200, gin.H{"errCode": 200, "errMsg": "success", "clientID": resp.ClientID, "clientUUID": resp.ClientID})
+	c.JSON(200, gin.H{"errCode": 200, "errMsg": "success", "clientID": resp.ClientID, "clientUUID": resp.ClientUUID})
 }
 
 func CreateClientToMessage(c *gin.Context) {
@@ -69,7 +69,7 @@ func CreateClientToMessage(c *gin.Context) {
 	c.JSON(200, gin.H{"errCode": 200, "errMsg": "success", "client_to_message": resp.ClientToMsgID})
 }
 
-func CreateClientToMessaageResp(c *gin.Context) {
+func CreateCollectToMessage(c *gin.Context) {
 
 	req := &pbBaseAPIClient.CreateCollectToMessageReq{Create: true}
 
