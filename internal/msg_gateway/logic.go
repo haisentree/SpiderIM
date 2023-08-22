@@ -37,7 +37,7 @@ func (ws *WServer) msgParse(conn *WSClient, binaryMsg []byte) {
 	case pkgMessage.Control_Get_Client_Max_Seq:
 		ws.parseGetClientMaxSeq(conn, &m)
 	case pkgMessage.Control_Get_Collect_Max_Seq:
-		log.Println("clientType Control_Get_Collect_Max_Seq")
+		ws.parseGetCollectMaxSeq(conn, &m)
 	case pkgMessage.Control_Get_Client_Status:
 		ws.parseGetClientStatus(conn, &m)
 	default:
@@ -196,7 +196,23 @@ func (ws *WServer) parseGetClientMaxSeq(conn *WSClient, msg *pkgMessage.CommonMs
 	log.Println("clientMsg case 10 resp:", resp.ClientToSeq)
 }
 
-// 少些了一个parseGetCollectMaxSeq
+func (ws *WServer) parseGetCollectMaxSeq(conn *WSClient, msg *pkgMessage.CommonMsg) {
+	d := &pkgMessage.GetCollectMaxSeqReq{}
+	json.Unmarshal([]byte(msg.Data), &d)
+	if err := Validate.Struct(d); err != nil {
+		log.Println("validate error: 1423", err)
+		return
+	}
+
+	req := &pbMsgGateway.GetCollectMaxSeqReq{
+		CollectList: d.CollectList,
+	}
+	resp, err := MsgGatewaySrvClient.ControlGetCollectMaxSeq(context.Background(), req)
+	if err != nil {
+		log.Println("case 10afs error")
+	}
+	log.Println("clientMsg case 10 resp:", resp.CollectToSeq)
+}
 
 func (ws *WServer) parseGetClientStatus(conn *WSClient, msg *pkgMessage.CommonMsg) {
 	d := &pkgMessage.GetClientStatusReq{}

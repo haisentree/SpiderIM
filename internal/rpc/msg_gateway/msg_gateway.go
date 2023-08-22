@@ -165,6 +165,7 @@ func (rpc *rpcMsgGateway) ControlPullCollectMsg(_ context.Context, req *pbMsgGat
 		Code: 200,
 	}
 	for _, v := range req.CollectToSeq {
+		log.Println("CollectID:", v.CollectID)
 		find_collect_to_msg := collect_to_msg.FindByCollectID(MysqlDB.DB, v.CollectID)
 		if v.SeqID < find_collect_to_msg.MaxSeq {
 			m := collect_msg.FindMessageBySeq(MysqlDB.DB, v.CollectID, v.SeqID, find_collect_to_msg.MaxSeq)

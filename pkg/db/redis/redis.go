@@ -2,6 +2,7 @@ package DBRedis
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 
 	"github.com/go-redis/redis"
@@ -46,7 +47,8 @@ func (r *RedisDB) GetClientStauts(client_id uint64) bool {
 	if err != nil {
 		fmt.Println("email_code reserve fail")
 	}
-	if len(value) == 0 {
+	log.Println("value:", value)
+	if value == "0" {
 		return false
 	}
 	return true

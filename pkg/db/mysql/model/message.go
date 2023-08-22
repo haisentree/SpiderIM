@@ -219,6 +219,6 @@ func (c *CollectMessage) CreateCollectMessage(db *gorm.DB, collect_to_message_id
 
 func (c *CollectMessage) FindMessageBySeq(db *gorm.DB, collect_to_message_id uint64, seq_start uint64, seq_end uint64) []CollectMessage {
 	var collect_messages []CollectMessage
-	db.Where("collect_to_message_id = AND seq_id >= ? AND seq_id <= ?", collect_to_message_id, seq_start, seq_end).Find(&collect_messages)
+	db.Where("collect_to_message_id = ? AND seq_id >= ? AND seq_id <= ?", collect_to_message_id, seq_start, seq_end).Find(&collect_messages)
 	return collect_messages
 }
