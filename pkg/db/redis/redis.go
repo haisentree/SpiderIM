@@ -15,7 +15,7 @@ type RedisDB struct {
 func (r *RedisDB) InitRedisDB() {
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     "192.168.45.128:6379",
-		Password: "lxx123",
+		Password: "123",
 		DB:       0,
 	})
 	r.RDB = rdb

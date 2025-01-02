@@ -14,7 +14,7 @@ type MysqlDB struct {
 }
 
 func (m *MysqlDB) InitMysqlDB() {
-	dsn := "root:root123root123@tcp(192.168.45.128:3306)/test?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:123@tcp(192.168.45.128:3306)/test?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(gomysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		fmt.Println("error")
